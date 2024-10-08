@@ -254,20 +254,20 @@ toc(startTime);
 % title('throughput')
 % 
 
-% 绘制发送信号时域波形
-figure
-subplot(2,1,1)
-title("发送信号幅值")
-plot(abs(Links{1,2}.TransmitSignal(:, 1)))
-subplot(2,1,2)
-title("发送信号相角")
-plot(angle(Links{1,2}.TransmitSignal(:, 1)))
-
-% 绘制接收信号时域波形
-figure
-subplot(2,1,1)
-title("接收信号幅值")
-plot(abs(UETotalSignal(:, 1)))
-subplot(2,1,2)
-title("接收信号相角")
-plot(angle(UETotalSignal(:, 1)))
+% % 绘制发送信号时域波形
+% figure
+% subplot(2,1,1)
+% title("发送信号幅值")
+% plot(abs(Links{1,2}.TransmitSignal(:, 1)))
+% subplot(2,1,2)
+% title("发送信号相角")
+% plot(angle(Links{1,2}.TransmitSignal(:, 1)))
+% 
+% % 绘制接收信号时域波形
+% figure
+% subplot(2,1,1)
+% title("接收信号幅值")
+% plot(abs(UETotalSignal(:, 1)))
+% subplot(2,1,2)
+% title("接收信号相角")
+% plot(angle(UETotalSignal(:, 1)))
