@@ -220,3 +220,29 @@ save(['./results/results_',timeStamp]);
 
 fprintf(['------- Done -------', '\n']);
 toc(startTime);
+
+% 1.2 绘制柱状图，数据在downlinkResults.userResults.BERCoded
+% subplot(2,2,1)
+% bar(downlinkResults.userResults.BERCoded.values)
+% xlabel('frame number')
+% ylabel('')
+% title('BER Coded')
+% 
+% subplot(2,2,2)
+% bar(downlinkResults.userResults.BERUncoded.values)
+% xlabel('frame number')
+% ylabel('')
+% title('BER Uncoded')
+% 
+% subplot(2,2,3)
+% bar(downlinkResults.userResults.FER.values)
+% xlabel('frame number')
+% ylabel('')
+% title('FER')
+% 
+% subplot(2,2,4)
+% bar(downlinkResults.userResults.throughput.values)
+% xlabel('frame number')
+% ylabel('')
+% title('throughput')
+% 
