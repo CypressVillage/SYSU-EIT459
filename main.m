@@ -125,6 +125,13 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     % add noise
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
                     
+                    % 绘制接收信号星座图
+                    if iFrame == nFrames
+                        scatterplot(UETotalSignal(:, 1))
+                        hold on
+                    end
+                    hold off
+
                     % process received signal
                     UE{iUE}.processReceiveSignal(UETotalSignal, Links, simParams);
 
