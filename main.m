@@ -253,3 +253,12 @@ toc(startTime);
 % ylabel('')
 % title('throughput')
 % 
+
+% 绘制发送信号时域波形
+subplot(2,1,1)
+title("发送信号幅值")
+plot(abs(Links{1,2}.TransmitSignal(:, 1)))
+subplot(2,1,2)
+title("发送信号相角")
+plot(angle(Links{1,2}.TransmitSignal(:, 1)))
+
