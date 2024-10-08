@@ -11,7 +11,7 @@ clc;
 
 %% Setup
 % select scenario
-simulationScenario = 'genericScenario';         % select a simulation scenario:
+simulationScenario = 'LTEAcompliant';         % select a simulation scenario:
                                                 % 'genericScenario'
                                                 % 'LTEAcompliant'
                                                 % 'multiLink'
@@ -20,6 +20,8 @@ simulationScenario = 'genericScenario';         % select a simulation scenario:
                                                                              
 % load parameters according to scenario                                               
 simParams = Parameters.SimulationParameters( simulationScenario );
+simParams.simulation.nFrames = 20;
+simParams.simulation.sweepValue = 140;
 
 % generate network topology and links between nodes
 [Links, BS, UE] = Topology.getTopology(simParams);
