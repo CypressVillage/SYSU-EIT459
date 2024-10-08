@@ -115,22 +115,22 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
 %                     grid on;
 %                     print('-dpdf','PSD_comp_','-bestfit')
                     
-                    % 绘制发送信号星座图
-                    if iFrame == nFrames
-                        scatterplot(Links{1,2}.TransmitSymbols{1,1})
-                        hold on
-                    end
-                    hold off
+                    % % 绘制发送信号星座图
+                    % if iFrame == nFrames
+                    %     scatterplot(Links{1,2}.TransmitSymbols{1,1})
+                    %     hold on
+                    % end
+                    % hold off
 
                     % add noise
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
                     
-                    % 绘制接收信号星座图
-                    if iFrame == nFrames
-                        scatterplot(UETotalSignal(:, 1))
-                        hold on
-                    end
-                    hold off
+                    % % 绘制接收信号星座图
+                    % if iFrame == nFrames
+                    %     scatterplot(UETotalSignal(:, 1))
+                    %     hold on
+                    % end
+                    % hold off
 
                     % process received signal
                     UE{iUE}.processReceiveSignal(UETotalSignal, Links, simParams);
@@ -255,6 +255,7 @@ toc(startTime);
 % 
 
 % 绘制发送信号时域波形
+figure
 subplot(2,1,1)
 title("发送信号幅值")
 plot(abs(Links{1,2}.TransmitSignal(:, 1)))
@@ -262,3 +263,11 @@ subplot(2,1,2)
 title("发送信号相角")
 plot(angle(Links{1,2}.TransmitSignal(:, 1)))
 
+% 绘制接收信号时域波形
+figure
+subplot(2,1,1)
+title("接收信号幅值")
+plot(abs(UETotalSignal(:, 1)))
+subplot(2,1,2)
+title("接收信号相角")
+plot(angle(UETotalSignal(:, 1)))
