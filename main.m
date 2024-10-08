@@ -43,7 +43,7 @@ NumWorkers  = myCluster.NumWorkers;
 fprintf(['------- Started -------', '\n']);
 
 % loop over sweep parameter
-parfor iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'parfor'
+for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'parfor'
     % update sweep value
     simParams.UpdateSweepValue(iSweep); %#ok
     
@@ -115,6 +115,13 @@ parfor iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or
 %                     grid on;
 %                     print('-dpdf','PSD_comp_','-bestfit')
                     
+                    % 绘制发送信号星座图
+                    if iFrame == nFrames
+                        scatterplot(Links{1,2}.TransmitSymbols{1,1})
+                        hold on
+                    end
+                    hold off
+
                     % add noise
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
                     
@@ -190,7 +197,7 @@ if simParams.simulation.simulateDownlink
     downlinkResults.postProcessResults();
     % plot results
     if sum(simParams.simulation.plotResultsFor) ~= 0
-        Results.plotResults( downlinkResults, 'downlink', simParams, UE, BS );
+        % Results.plotResults( downlinkResults, 'downlink', simParams, UE, BS );
     end
 end
 if simParams.simulation.simulateUplink
