@@ -266,3 +266,15 @@ toc(startTime);
 % subplot(2,1,2)
 % plot(angle(UETotalSignal(:, 1)))
 % title("接收信号相角")
+
+% 1.1 绘制发送信号功率谱
+figure
+[pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+plot(f, 10*log10(pxx))
+title("发送信号功率谱")
+
+% 1.2 绘制接收信号功率谱
+figure
+[pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+plot(f, 10*log10(pxx))
+title("接收信号功率谱")
