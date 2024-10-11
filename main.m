@@ -23,6 +23,9 @@ simParams = Parameters.SimulationParameters( simulationScenario );
 % 1.1 设置仿真参数
 simParams.simulation.nFrames = 20;
 simParams.simulation.sweepValue = 140;
+simParams.simulation.nAntennasBaseStation = 1;
+simParams.simulation.nAntennasUser = 1;
+simParams.modulation.nStreams = 1 ;
 simParams.modulation.precodingMatrix{1} = 1 / sqrt(2);
 
 % generate network topology and links between nodes
@@ -278,3 +281,5 @@ figure
 [pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
 plot(f, 10*log10(pxx))
 title("接收信号功率谱")
+
+% 绘制接收机信道估计的频率响应（3D图， 横轴为子载波和OFDM符号数）

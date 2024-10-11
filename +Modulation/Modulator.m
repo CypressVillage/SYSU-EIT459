@@ -212,6 +212,20 @@ methods
                     % calculate channel estimation error
                     channelEstimationMSE = 10^(-(txPower-30-pathloss)/10) * mean(abs(obj.Channel(:) - perfectChannel(:)).^2);
                     
+                        % disp(obj.Channel)
+                        % disp(size(obj.Channel))
+                        x = 1:1:72;
+                        y = 1:1:14;
+                        [x,y] = meshgrid(x,y);
+                        disp(size(x))
+                        disp(size(y))
+                        z = obj.Channel;
+                        surf(x,y,10*log(abs(z')));
+                        xlabel('子载波')
+                        ylabel('OFDM符号')
+                        zlabel('10*log_{10}|channel estimate|')
+                        title('信道估计的频域响应')
+
                 else
                     error('Channel estimation method not supported');
                 end
