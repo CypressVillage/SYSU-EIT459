@@ -282,4 +282,6 @@ figure
 plot(f, 10*log10(pxx))
 title("接收信号功率谱")
 
-% 绘制接收机信道估计的频率响应（3D图， 横轴为子载波和OFDM符号数）
+% 保存发射信号
+var4_1 = Links{1,2}.TransmitSignal(:, 1);
+save('TransmitSignal.mat', 'var4_1')
