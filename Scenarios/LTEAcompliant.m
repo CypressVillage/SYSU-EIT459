@@ -53,7 +53,7 @@ scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MI
 scStr.simulation.nAntennasUser              = 2;                        % 
 scStr.simulation.userVelocity               = 0;                        % UE velocity in m/s
 
-scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
+scStr.simulation.pathloss                   = [110];                     % per Link, channel pathloss in dB, this is most likely swept over
 
 % Nonlinearity model
 scStr.simulation.downlinkNonlinearity       = false;                    % Apply Rapp nonlinear model to downlink channels: either true of false                                                          

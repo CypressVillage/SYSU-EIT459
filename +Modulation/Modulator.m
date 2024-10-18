@@ -217,14 +217,23 @@ methods
                         x = 1:1:144;
                         y = 1:1:14;
                         [x,y] = meshgrid(x,y);
-                        disp(size(x))
-                        disp(size(y))
+                        % disp(size(x))
+                        % disp(size(y))
+                        figure(1)
                         z = obj.Channel;
                         surf(x,y,10*log(abs(z')));
                         xlabel('子载波')
                         ylabel('OFDM符号')
                         zlabel('10*log_{10}|channel estimate|')
                         title('信道估计的频域响应')
+
+                        figure(2)
+                        z_perfect = perfectChannel;
+                        surf(x,y,10*log(abs(z_perfect')));
+                        xlabel('子载波')
+                        ylabel('OFDM符号')
+                        zlabel('10*log_{10}|channel estimate|')
+                        title('真实信道的频率响应')
 
                 else
                     error('Channel estimation method not supported');
