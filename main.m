@@ -22,7 +22,7 @@ simulationScenario = 'LTEAcompliant';           % select a simulation scenario:
 simParams = Parameters.SimulationParameters( simulationScenario );
 % 1.1 设置仿真参数
 simParams.simulation.nFrames = 20;
-simParams.simulation.sweepValue = 140;
+simParams.simulation.sweepValue = 130;
 simParams.simulation.nAntennasBaseStation = 1;
 simParams.simulation.nAntennasUser = 1;
 simParams.modulation.nStreams = 1 ;
@@ -102,8 +102,8 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     primaryLink.generateReceiveSignal();
                     UETotalSignal = primaryLink.ReceiveSignal;
                     
-                    % 4.2 用保存的信号文件作为接收机输入
-                    UETotalSignal = primaryLink.TransmitSignal;
+                    % % 4.2 用保存的信号文件作为接收机输入
+                    % UETotalSignal = primaryLink.TransmitSignal;
 
                     % Collect signals from all other BSs
                     for iBS = 2:length(UE{iUE}.TransmitBS)
@@ -223,37 +223,37 @@ save(['./results/results_',timeStamp]);
 fprintf(['------- Done -------', '\n']);
 toc(startTime);
 
-% % 1.2 绘制柱状图，数据在downlinkResults.userResults.BERCoded
-% subplot(2,2,1)
-% bar(downlinkResults.userResults.BERCoded.values)
-% xlabel('frame number')
-% ylabel('')
-% title('BER Coded')
+% 1.2 绘制柱状图，数据在downlinkResults.userResults.BERCoded
+subplot(2,2,1)
+bar(downlinkResults.userResults.BERCoded.values)
+xlabel('frame number')
+ylabel('')
+title('BER Coded')
 
-% subplot(2,2,2)
-% bar(downlinkResults.userResults.BERUncoded.values)
-% xlabel('frame number')
-% ylabel('')
-% title('BER Uncoded')
+subplot(2,2,2)
+bar(downlinkResults.userResults.BERUncoded.values)
+xlabel('frame number')
+ylabel('')
+title('BER Uncoded')
 
-% subplot(2,2,3)
-% bar(downlinkResults.userResults.FER.values)
-% xlabel('frame number')
-% ylabel('')
-% title('FER')
+subplot(2,2,3)
+bar(downlinkResults.userResults.FER.values)
+xlabel('frame number')
+ylabel('')
+title('FER')
 
-% subplot(2,2,4)
-% bar(downlinkResults.userResults.throughput.values)
-% xlabel('frame number')
-% ylabel('')
-% title('throughput')
+subplot(2,2,4)
+bar(downlinkResults.userResults.throughput.values)
+xlabel('frame number')
+ylabel('')
+title('throughput')
 
 % % 2.1 绘制发送信号星座图
 % figure
 % scatter(real(Links{1,2}.TransmitSymbols{1,1}), imag(Links{1,2}.TransmitSymbols{1,1}), '.')
-% % 2.2 绘制接收信号星座图
-% figure
-% scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
+% 2.2 绘制接收信号星座图
+figure
+scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
 
 % % 3.1 绘制发送信号时域波形
 % figure
