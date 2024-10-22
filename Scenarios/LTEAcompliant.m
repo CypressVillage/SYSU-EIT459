@@ -51,7 +51,7 @@ scStr.simulation.txPowerUser                = 30;                       % user t
 
 scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
 scStr.simulation.nAntennasUser              = 2;                        % 
-scStr.simulation.userVelocity               = 0;                        % UE velocity in m/s
+scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
 
@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'CLSM';  
+scStr.modulation.transmissionMode           = 'custom';  
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
@@ -103,7 +103,7 @@ scStr.modulation.mcs                        = 8;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 144;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 72;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 60e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:144'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:72'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
