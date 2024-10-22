@@ -22,7 +22,7 @@ simulationScenario = 'LTEAcompliant';           % select a simulation scenario:
 simParams = Parameters.SimulationParameters( simulationScenario );
 % 1.1 设置仿真参数
 simParams.simulation.nFrames = 20;
-simParams.simulation.sweepValue = 110;
+simParams.simulation.sweepValue = 120;
 simParams.simulation.nAntennasBaseStation = 1;
 simParams.simulation.nAntennasUser = 1;
 simParams.modulation.nStreams = 1 ;

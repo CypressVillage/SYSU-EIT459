@@ -214,7 +214,7 @@ methods
                     
                         % disp(obj.Channel)
                         % disp(size(obj.Channel))
-                        x = 1:1:144;
+                        x = 1:1:72;
                         y = 1:1:14;
                         [x,y] = meshgrid(x,y);
                         % disp(size(x))
