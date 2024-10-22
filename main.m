@@ -22,7 +22,7 @@ simulationScenario = 'LTEAcompliant';           % select a simulation scenario:
 simParams = Parameters.SimulationParameters( simulationScenario );
 % 1.1 设置仿真参数
 simParams.simulation.nFrames = 20;
-simParams.simulation.sweepValue = 130;
+simParams.simulation.sweepValue = 110;
 simParams.simulation.nAntennasBaseStation = 1;
 simParams.simulation.nAntennasUser = 1;
 simParams.modulation.nStreams = 1 ;
@@ -255,23 +255,23 @@ title('throughput')
 figure
 scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
 
-% % 3.1 绘制发送信号时域波形
-% figure
-% subplot(2,1,1)
-% plot(abs(Links{1,2}.TransmitSymbols{1,1}))
-% title("发送信号幅值")
-% subplot(2,1,2)
-% plot(angle(Links{1,2}.TransmitSymbols{1,1}))
-% title("发送信号相角")
+% 3.1 绘制发送信号时域波形
+figure
+subplot(2,1,1)
+plot(abs(Links{1,2}.TransmitSymbols{1,1}))
+title("发送信号幅值")
+subplot(2,1,2)
+plot(angle(Links{1,2}.TransmitSymbols{1,1}))
+title("发送信号相角")
 
-% % 3.2 绘制接收信号时域波形
-% figure
-% subplot(2,1,1)
-% plot(abs(UETotalSignal(:, 1)))
-% title("接收信号幅值")
-% subplot(2,1,2)
-% plot(angle(UETotalSignal(:, 1)))
-% title("接收信号相角")
+% 3.2 绘制接收信号时域波形
+figure
+subplot(2,1,1)
+plot(abs(UETotalSignal(:, 1)))
+title("接收信号幅值")
+subplot(2,1,2)
+plot(angle(UETotalSignal(:, 1)))
+title("接收信号相角")
 
 % 1.1 绘制发送信号功率谱
 figure

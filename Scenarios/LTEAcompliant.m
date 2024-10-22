@@ -51,7 +51,7 @@ scStr.simulation.txPowerUser                = 30;                       % user t
 
 scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
 scStr.simulation.nAntennasUser              = 2;                        % 
-scStr.simulation.userVelocity               = 0;                        % UE velocity in m/s
+scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
 
@@ -65,7 +65,7 @@ scStr.channel.dopplerModel                  = 'Discrete-Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'PedestrianA';  
+scStr.channel.powerDelayProfile             = 'VehicularA';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'CLSM';  
+scStr.modulation.transmissionMode           = 'custom';  
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
