@@ -65,7 +65,7 @@ scStr.channel.dopplerModel                  = 'Discrete-Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'VehicularA';  
+scStr.channel.powerDelayProfile             = 'PedestrianA';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
@@ -103,7 +103,7 @@ scStr.modulation.mcs                        = 8;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 144;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 72;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 60e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:144'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:72'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
