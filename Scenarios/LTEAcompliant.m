@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'custom';  
+scStr.modulation.transmissionMode           = 'CLSM';  
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
@@ -103,8 +103,8 @@ scStr.modulation.mcs                        = 8;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 72;                       % this corresponds to a 1.4MHz transmission
-scStr.modulation.subcarrierSpacing          = 60e3;                     
+scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
 scStr.modulation.samplingRate               = 15e3 * 2048;              % sampling rate
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:72'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['none:144,UE1:156'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
