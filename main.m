@@ -24,7 +24,7 @@ simParams = Parameters.SimulationParameters( simulationScenario );
 simParams.simulation.nFrames = 20;
 simParams.simulation.sweepValue = 120;
 simParams.simulation.nAntennasBaseStation = 1;
-simParams.simulation.nAntennasUser = 1;
+% simParams.simulation.nAntennasUser = 1;
 simParams.modulation.nStreams = 1 ;
 simParams.modulation.precodingMatrix{1} = 1 / sqrt(2);
 
@@ -224,67 +224,67 @@ fprintf(['------- Done -------', '\n']);
 toc(startTime);
 
 % 1.2 绘制柱状图，数据在downlinkResults.userResults.BERCoded
-subplot(2,2,1)
-bar(downlinkResults.userResults.BERCoded.values)
-xlabel('frame number')
-ylabel('')
-title('BER Coded')
+% subplot(2,2,1)
+% bar(downlinkResults.userResults.BERCoded.values)
+% xlabel('frame number')
+% ylabel('')
+% title('BER Coded')
 
-subplot(2,2,2)
-bar(downlinkResults.userResults.BERUncoded.values)
-xlabel('frame number')
-ylabel('')
-title('BER Uncoded')
+% subplot(2,2,2)
+% bar(downlinkResults.userResults.BERUncoded.values)
+% xlabel('frame number')
+% ylabel('')
+% title('BER Uncoded')
 
-subplot(2,2,3)
-bar(downlinkResults.userResults.FER.values)
-xlabel('frame number')
-ylabel('')
-title('FER')
+% subplot(2,2,3)
+% bar(downlinkResults.userResults.FER.values)
+% xlabel('frame number')
+% ylabel('')
+% title('FER')
 
-subplot(2,2,4)
-bar(downlinkResults.userResults.throughput.values)
-xlabel('frame number')
-ylabel('')
-title('throughput')
+% subplot(2,2,4)
+% bar(downlinkResults.userResults.throughput.values)
+% xlabel('frame number')
+% ylabel('')
+% title('throughput')
 
 % % 2.1 绘制发送信号星座图
 % figure
 % scatter(real(Links{1,2}.TransmitSymbols{1,1}), imag(Links{1,2}.TransmitSymbols{1,1}), '.')
 % 2.2 绘制接收信号星座图
-figure
-scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
+% figure
+% scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
 
-% 3.1 绘制发送信号时域波形
-figure
-subplot(2,1,1)
-plot(abs(Links{1,2}.TransmitSymbols{1,1}))
-title("发送信号幅值")
-subplot(2,1,2)
-plot(angle(Links{1,2}.TransmitSymbols{1,1}))
-title("发送信号相角")
+% % 3.1 绘制发送信号时域波形
+% figure
+% subplot(2,1,1)
+% plot(abs(Links{1,2}.TransmitSymbols{1,1}))
+% title("发送信号幅值")
+% subplot(2,1,2)
+% plot(angle(Links{1,2}.TransmitSymbols{1,1}))
+% title("发送信号相角")
 
-% 3.2 绘制接收信号时域波形
-figure
-subplot(2,1,1)
-plot(abs(UETotalSignal(:, 1)))
-title("接收信号幅值")
-subplot(2,1,2)
-plot(angle(UETotalSignal(:, 1)))
-title("接收信号相角")
+% % 3.2 绘制接收信号时域波形
+% figure
+% subplot(2,1,1)
+% plot(abs(UETotalSignal(:, 1)))
+% title("接收信号幅值")
+% subplot(2,1,2)
+% plot(angle(UETotalSignal(:, 1)))
+% title("接收信号相角")
 
-% 1.1 绘制发送信号功率谱
-figure
-[pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("发送信号功率谱")
+% % 1.1 绘制发送信号功率谱
+% figure
+% [pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+% plot(f, 10*log10(pxx))
+% title("发送信号功率谱")
 
-% 1.2 绘制接收信号功率谱
-figure
-[pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("接收信号功率谱")
+% % 1.2 绘制接收信号功率谱
+% figure
+% [pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+% plot(f, 10*log10(pxx))
+% title("接收信号功率谱")
 
-% 保存发射信号
-var4_1 = Links{1,2}.TransmitSignal(:, 1);
-save('TransmitSignal.mat', 'var4_1')
+% % 保存发射信号
+% var4_1 = Links{1,2}.TransmitSignal(:, 1);
+% save('TransmitSignal.mat', 'var4_1')

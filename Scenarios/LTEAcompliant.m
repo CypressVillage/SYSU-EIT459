@@ -5,10 +5,10 @@
 %% Topology
 % Specifiy all the nodes in ascending order with starting
 % index of 1 (BS0 or UE0 is not allowed).
-scStr.topology.nodes                        = ['BS1,UE1'];              % single cell only
+scStr.topology.nodes                        = ['BS1,UE1,UE2,UE3'];              % single cell only
 
 % Primary (desired) links
-scStr.topology.primaryLinks                 = ['BS1:UE1'];              % only downlink
+scStr.topology.primaryLinks                 = ['BS1:UE1,BS1:UE2,BS1:UE3'];              % only downlink
                                             
 % Links for Joint Tranmission and Detection (future work)                         
 scStr.topology.jointTxRxLinks               = [''];  
@@ -50,7 +50,7 @@ scStr.simulation.txPowerBaseStation         = 30;                       % base s
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
 scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
+scStr.simulation.nAntennasUser              = [1 1 1];                        % 
 scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
@@ -103,7 +103,7 @@ scStr.modulation.mcs                        = 8;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 300+1+72+1+600;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['none:144,UE1:156'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:300,none:1,UE2:72,none:1,UE3:600'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
