@@ -135,9 +135,9 @@ classdef Link < handle
                         simParams.simulation.pilotPattern,...           % Pilot pattern
                         [...                                            % Matrix that represents the pilot pattern parameters
                         obj.Modulator.WaveformObject.Nr.Subcarriers,... % Number of subcarriers
-                        1; ...                                          % Pilot spacing in the frequency domain
+                        11; ...                                          % Pilot spacing in the frequency domain
                         obj.Modulator.WaveformObject.Nr.MCSymbols,...   % Number of Symbols
-                        6 ...                                         % Pilot spacing in the time domain
+                        1 ...                                         % Pilot spacing in the time domain
                         ],...
                         'linear',...                                    % Interpolation(Extrapolation) method
                         obj.schedule, ...
