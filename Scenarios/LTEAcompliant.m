@@ -72,7 +72,7 @@ scStr.channel.delta                         = 1;
 %% Channel Estimation and Equalization Parameters
 scStr.simulation.channelEstimationMethod    = 'PilotAided';             % pilot aided LS channel estimation
 scStr.simulation.noisePowerEstimation       = false;
-scStr.simulation.pilotPattern               = 'LTE Downlink';           % LTE Downlink like pilot allocations
+scStr.simulation.pilotPattern               = 'Rectangular';           % LTE Downlink like pilot allocations
                                                                     
 scStr.simulation.equalizerType              = 'One-Tap';                % One-Tap equalizer
 scStr.simulation.receiverTypeMIMO           = 'ZF';                     % Zero Forcing equalization
