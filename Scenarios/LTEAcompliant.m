@@ -103,7 +103,7 @@ scStr.modulation.mcs                        = 8;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 1200;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['none:144,UE1:156'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:1200'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
