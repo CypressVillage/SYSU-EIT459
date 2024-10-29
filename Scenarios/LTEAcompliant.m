@@ -5,10 +5,10 @@
 %% Topology
 % Specifiy all the nodes in ascending order with starting
 % index of 1 (BS0 or UE0 is not allowed).
-scStr.topology.nodes                        = ['BS1,UE1,UE2'];              % single cell only
+scStr.topology.nodes                        = ['BS1,UE1,UE2,UE3,UE4'];              % single cell only
 
 % Primary (desired) links
-scStr.topology.primaryLinks                 = ['BS1:UE1,BS1:UE2'];              % only downlink
+scStr.topology.primaryLinks                 = ['BS1:UE1,BS1:UE2,BS1:UE3,BS1:UE4'];              % only downlink
                                             
 % Links for Joint Tranmission and Detection (future work)                         
 scStr.topology.jointTxRxLinks               = [''];  
@@ -96,7 +96,7 @@ scStr.feedback.ri                           = false;
 scStr.feedback.cqi                          = true;
 scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
 scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
-scStr.modulation.mcs                        = [10 7];
+scStr.modulation.mcs                        = [10 7 3 3];
 
 %% Modulation Parameters
 % waveform
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:300,none:48,UE2:600'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:300,none:8,UE3:12,none:8,UE4:12,none:8,UE2:600'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
