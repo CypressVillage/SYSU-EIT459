@@ -5,10 +5,10 @@
 %% Topology
 % Specifiy all the nodes in ascending order with starting
 % index of 1 (BS0 or UE0 is not allowed).
-scStr.topology.nodes                        = ['BS1,UE1'];              % single cell only
+scStr.topology.nodes                        = ['BS1,UE1,UE2,UE3,UE4'];              % single cell only
 
 % Primary (desired) links
-scStr.topology.primaryLinks                 = ['BS1:UE1'];              % only downlink
+scStr.topology.primaryLinks                 = ['BS1:UE1,BS1:UE2,BS1:UE3,BS1:UE4'];              % only downlink
                                             
 % Links for Joint Tranmission and Detection (future work)                         
 scStr.topology.jointTxRxLinks               = [''];  
@@ -49,9 +49,9 @@ scStr.simulation.centerFrequency            = 2.5e9;                    % center
 scStr.simulation.txPowerBaseStation         = 30;                       % base station total transmit power in dBm
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
-scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
-scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
+scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
+scStr.simulation.nAntennasUser              = 1;                        % 
+scStr.simulation.userVelocity               = [120 350 0 30] / 3.6;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
 
@@ -61,11 +61,11 @@ scStr.simulation.amplifierOBO               = [1];                      % Amplif
 scStr.simulation.smoothnessFactor           = [3];                      % Smoothness factor for the Rapp model, per BS, >=0
 
 %% Channel Parameters
-scStr.channel.dopplerModel                  = 'Discrete-Jakes';
+scStr.channel.dopplerModel                  = 'Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'PedestrianA';  
+scStr.channel.powerDelayProfile             = 'VehicularA';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'CLSM';  
+scStr.modulation.transmissionMode           = 'custom';  
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
@@ -94,16 +94,16 @@ scStr.feedback.enable                       = false;                    % this p
 scStr.feedback.pmi                          = false;
 scStr.feedback.ri                           = false; 
 scStr.feedback.cqi                          = true;
-scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
-scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
-scStr.modulation.mcs                        = 8;
+scStr.modulation.nStreams                   = 1;                        % 2 active spatial stream
+scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(1);       % employed precoding matrix
+scStr.modulation.mcs                        = [10 7 3 3];
 
 %% Modulation Parameters
 % waveform
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 300+8+12+8+12+8+600;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['none:144,UE1:156'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:300,none:8,UE3:12,none:8,UE4:12,none:8,UE2:600'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
