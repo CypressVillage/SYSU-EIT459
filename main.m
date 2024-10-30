@@ -289,41 +289,69 @@ toc(startTime);
 % var4_1 = Links{1,2}.TransmitSignal(:, 1);
 % save('TransmitSignal.mat', 'var4_1')
 
-% exp04-03 绘制所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
-for iUE = 1:nUE
-    UEID = UE{iUE}.ID;
+% exp04-03 绘制每个基站所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+for iBS = 1:nBS
+    BSID = BS{iBS}.ID;
+    for iUE = 1:nUE
+        UEID = UE{iUE}.ID;
 
-    % 绘制接收信号星座图
-    figure(iUE*100+1)
-    scatter(real(Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.rxData_(:, 1)), imag(Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.rxData_(:, 1)), '.')
-    xlim([-1.5 1.5])
-    ylim([-1.5 1.5])
+        if isempty(Links{BSID, UEID}.Modulator)
+            continue
+        end
+        % % 绘制接收信号星座图
+        % figure(iBS*100+iUE*10+1)
+        % scatter(real(Links{BSID, UEID}.Modulator.rxData_(:, 1)), imag(Links{BSID, UEID}.Modulator.rxData_(:, 1)), '.')
+        % xlim([-1.5 1.5])
+        % ylim([-1.5 1.5])
 
-    % 绘制吞吐量
-    figure(iUE*100+2)
-    bar(downlinkResults.userResults(iUE).throughput.values)
-    xlabel('frame number')
-    ylabel('throughput')
-    title(['User ', num2str(iUE)])
+        % 绘制误码率
+        figure(iBS*100+iUE*10+1)
+        bar(downlinkResults.userResults(iUE).BERUncoded.values)
+        xlabel('frame number')
+        ylabel('BER Uncoded')
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' Coded BER'])
 
-    % 绘制真实信道
-    figure(iUE*100+3)
-    channel = Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.Channel(:,:,1);
-    x = 1:1:size(channel, 1);
-    y = 1:1:size(channel, 2);
-    [X, Y] = meshgrid(x, y);
-    surf(X, Y, 10*log(abs(channel')))
-    xlabel('subcarrier')
-    ylabel('OFDM symbol')
-    zlabel('channel gain')
-    title(['User ', num2str(iUE), ' real channel'])
+        % 绘制吞吐量
+        figure(iBS*100+iUE*10+2)
+        bar(downlinkResults.userResults(iUE).throughput.values)
+        xlabel('frame number')
+        ylabel('throughput')
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE)])
 
-    % 绘制估计信道
-    figure(iUE*100+4)
-    channel = Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.perfectChannel_(:,:,1);
-    surf(X, Y, 10*log(abs(channel')))
-    xlabel('subcarrier')
-    ylabel('OFDM symbol')
-    zlabel('channel gain')
-    title(['User ', num2str(iUE), ' estimated channel'])
+        % 绘制接收信号功率谱
+        figure(iBS*100+iUE*10+3)
+        [pxx, f] = pwelch(Links{BSID, UEID}.Modulator.rxData_(:, 1), [], [], [], simParams.modulation.samplingRate);
+        plot(f, 10*log10(pxx))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
+
+        % 绘制接收信号时域波形
+        figure(iBS*100+iUE*10+4)
+        subplot(2,1,1)
+        plot(abs(Links{BSID, UEID}.Modulator.rxData_(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
+        subplot(2,1,2)
+        plot(angle(Links{BSID, UEID}.Modulator.rxData_(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal phase'])
+
+        % % 绘制真实信道
+        % figure(iBS*100+iUE*10+3)
+        % channel = Links{BSID, UEID}.Modulator.Channel(:,:,1);
+        % x = 1:1:size(channel, 1);
+        % y = 1:1:size(channel, 2);
+        % [X, Y] = meshgrid(x, y);
+        % surf(X, Y, 10*log(abs(channel')))
+        % xlabel('subcarrier')
+        % ylabel('OFDM symbol')
+        % zlabel('channel gain')
+        % title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' real channel'])
+
+        % % 绘制估计信道
+        % figure(iBS*100+iUE*10+4)
+        % channel = Links{BSID, UEID}.Modulator.perfectChannel_(:,:,1);
+        % surf(X, Y, 10*log(abs(channel')))
+        % xlabel('subcarrier')
+        % ylabel('OFDM symbol')
+        % zlabel('channel gain')
+        % title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
+    end
 end
