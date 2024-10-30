@@ -273,18 +273,57 @@ toc(startTime);
 % plot(angle(UETotalSignal(:, 1)))
 % title("接收信号相角")
 
-% 1.1 绘制发送信号功率谱
-figure
-[pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("发送信号功率谱")
+% % 1.1 绘制发送信号功率谱
+% figure
+% [pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+% plot(f, 10*log10(pxx))
+% title("发送信号功率谱")
 
-% 1.2 绘制接收信号功率谱
-figure
-[pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("接收信号功率谱")
+% % 1.2 绘制接收信号功率谱
+% figure
+% [pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+% plot(f, 10*log10(pxx))
+% title("接收信号功率谱")
 
-% 保存发射信号
-var4_1 = Links{1,2}.TransmitSignal(:, 1);
-save('TransmitSignal.mat', 'var4_1')
+% % 保存发射信号
+% var4_1 = Links{1,2}.TransmitSignal(:, 1);
+% save('TransmitSignal.mat', 'var4_1')
+
+% exp04-03 绘制所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+for iUE = 1:nUE
+    UEID = UE{iUE}.ID;
+
+    % 绘制接收信号星座图
+    figure(iUE*100+1)
+    scatter(real(Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.rxData_(:, 1)), imag(Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.rxData_(:, 1)), '.')
+    xlim([-1.5 1.5])
+    ylim([-1.5 1.5])
+
+    % 绘制吞吐量
+    figure(iUE*100+2)
+    bar(downlinkResults.userResults(iUE).throughput.values)
+    xlabel('frame number')
+    ylabel('throughput')
+    title(['User ', num2str(iUE)])
+
+    % 绘制真实信道
+    figure(iUE*100+3)
+    channel = Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.Channel(:,:,1);
+    x = 1:1:size(channel, 1);
+    y = 1:1:size(channel, 2);
+    [X, Y] = meshgrid(x, y);
+    surf(X, Y, 10*log(abs(channel')))
+    xlabel('subcarrier')
+    ylabel('OFDM symbol')
+    zlabel('channel gain')
+    title(['User ', num2str(iUE), ' real channel'])
+
+    % 绘制估计信道
+    figure(iUE*100+4)
+    channel = Links{UE{iUE}.TransmitBS(1), UEID}.Modulator.perfectChannel_(:,:,1);
+    surf(X, Y, 10*log(abs(channel')))
+    xlabel('subcarrier')
+    ylabel('OFDM symbol')
+    zlabel('channel gain')
+    title(['User ', num2str(iUE), ' estimated channel'])
+end

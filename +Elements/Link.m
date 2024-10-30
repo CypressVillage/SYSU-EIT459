@@ -147,7 +147,7 @@ classdef Link < handle
                     obj.Modulator.ChannelEstimator = ChannelEstimator;
                     nPilotSymbols = ChannelEstimator.NrPilotSymbols;
 
-                    ChannelEstimator.PlotPilotPattern();
+                    % ChannelEstimator.PlotPilotPattern();
                 otherwise
                     error('Channel estimation method unknown.');
             end
