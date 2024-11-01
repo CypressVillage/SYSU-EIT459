@@ -103,11 +103,11 @@ scStr.modulation.mcs                        = [10 7 3 3];
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = [300 600];                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = [300 900];                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = [15e3 60e3];                     
 scStr.modulation.nSymbolsTotal              = [15 60];                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
-scStr.modulation.samplingRate               = 60e3 * 2048;              % sampling rate
+scStr.modulation.samplingRate               = 15e3 * 2048 * 2;              % sampling rate
 
 %% Channel Coding Parameters
 scStr.coding.code                           = {'Turbo'};
@@ -119,5 +119,5 @@ scStr.coding.decodingIterations             = 8;
 scStr.schedule.fixedScheduleDL{1}           = ['UE1:300'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
-scStr.schedule.fixedScheduleDL{2}           = ['UE2:600'];             % downlink only
+scStr.schedule.fixedScheduleDL{2}           = ['none:300,UE2:600'];             % downlink only
 scStr.schedule.fixedScheduleUL{2}           = [];
