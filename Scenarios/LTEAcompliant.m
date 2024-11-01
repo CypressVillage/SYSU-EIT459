@@ -49,8 +49,8 @@ scStr.simulation.centerFrequency            = 2.5e9;                    % center
 scStr.simulation.txPowerBaseStation         = 30;                       % base station total transmit power in dBm
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
-scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
+scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
+scStr.simulation.nAntennasUser              = 1;                        % 
 scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'custom';  
+scStr.modulation.transmissionMode           = 'custom';
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
@@ -94,8 +94,8 @@ scStr.feedback.enable                       = false;                    % this p
 scStr.feedback.pmi                          = false;
 scStr.feedback.ri                           = false; 
 scStr.feedback.cqi                          = true;
-scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
-scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
+scStr.modulation.nStreams                   = 1;                        % 2 active spatial stream
+scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(1);       % employed precoding matrix
 scStr.modulation.mcs                        = [10 7 3 3];
 
 %% Modulation Parameters

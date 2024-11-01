@@ -23,10 +23,10 @@ simParams = Parameters.SimulationParameters( simulationScenario );
 % 1.1 设置仿真参数
 simParams.simulation.nFrames = 20;
 simParams.simulation.sweepValue = 110;
-simParams.simulation.nAntennasBaseStation = 1;
+% simParams.simulation.nAntennasBaseStation = 1;
 % simParams.simulation.nAntennasUser = 1;
-simParams.modulation.nStreams = 1 ;
-simParams.modulation.precodingMatrix{1} = 1 / sqrt(2);
+% simParams.modulation.nStreams = 1 ;
+% simParams.modulation.precodingMatrix{1} = 1 / sqrt(2);
 
 % generate network topology and links between nodes
 [Links, BS, UE] = Topology.getTopology(simParams);
