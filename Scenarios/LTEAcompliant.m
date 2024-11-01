@@ -106,7 +106,7 @@ scStr.modulation.waveform                   = { 'OFDM' };
 scStr.modulation.numerOfSubcarriers         = [300 900];                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = [15e3 60e3];                     
 scStr.modulation.nSymbolsTotal              = [15 60];                       % 15 symbols out of which one is used for all CPs
-scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
+scStr.modulation.nGuardSymbols              = [1 4];                        % use one out of 15 symbol durations as CP for remaining 14 symbols
 scStr.modulation.samplingRate               = 15e3 * 2048 * 2;              % sampling rate
 
 %% Channel Coding Parameters
