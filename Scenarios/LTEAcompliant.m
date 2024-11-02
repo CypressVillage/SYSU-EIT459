@@ -15,7 +15,7 @@ scStr.topology.jointTxRxLinks               = [''];
 
 % Interference Links   
 scStr.topology.interferenceGeneration       = 'Automatic';              % no interference link in this scenario
-scStr.topology.attenuation                  = 30;                       % therefore parameters have no effect
+scStr.topology.attenuation                  = 200;                       % therefore parameters have no effect
 scStr.topology.interferingLinks             = ['']; 
 
 %% General Simulation Parameters
@@ -96,7 +96,7 @@ scStr.feedback.ri                           = false;
 scStr.feedback.cqi                          = true;
 scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
 scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
-scStr.modulation.mcs                        = [10 7 3 3];
+scStr.modulation.mcs                        = [8 8];
 
 %% Modulation Parameters
 % waveform
@@ -104,7 +104,7 @@ scStr.modulation.waveform                   = { 'UFMC' };
 scStr.modulation.nSubcarriersPerSubband     = [12 12];
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = [300 900];                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = [144 36];                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = [15e3 60e3];                     
 scStr.modulation.nSymbolsTotal              = [15 60];                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = [1 4];                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -117,8 +117,8 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:300'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:68,none:76'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
-scStr.schedule.fixedScheduleDL{2}           = ['none:300,UE2:600'];             % downlink only
+scStr.schedule.fixedScheduleDL{2}           = ['none:19,UE2:17'];             % downlink only
 scStr.schedule.fixedScheduleUL{2}           = [];
