@@ -101,7 +101,7 @@ scStr.modulation.mcs                        = [8 8];
 %% Modulation Parameters
 % waveform
 scStr.modulation.waveform                   = { 'UFMC' }; 
-scStr.modulation.nSubcarriersPerSubband     = [12 12];
+scStr.modulation.nSubcarriersPerSubband     = [5 5];
 
 % numerology setup
 scStr.modulation.numerOfSubcarriers         = [144 36];                       % this corresponds to a 1.4MHz transmission
@@ -117,8 +117,8 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:68,none:76'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:60,none:84'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
-scStr.schedule.fixedScheduleDL{2}           = ['none:19,UE2:17'];             % downlink only
+scStr.schedule.fixedScheduleDL{2}           = ['none:21,UE2:15'];             % downlink only
 scStr.schedule.fixedScheduleUL{2}           = [];
