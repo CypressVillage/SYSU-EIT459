@@ -100,7 +100,8 @@ scStr.modulation.mcs                        = [10 7 3 3];
 
 %% Modulation Parameters
 % waveform
-scStr.modulation.waveform                   = { 'OFDM' }; 
+scStr.modulation.waveform                   = { 'UFMC' }; 
+scStr.modulation.nSubcarriersPerSubband     = [12 12];
 
 % numerology setup
 scStr.modulation.numerOfSubcarriers         = [300 900];                       % this corresponds to a 1.4MHz transmission
