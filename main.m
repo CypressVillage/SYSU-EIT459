@@ -122,6 +122,7 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     
                     % process received signal
                     UE{iUE}.processReceiveSignal(UETotalSignal, Links, simParams);
+                    Links{UE{iUE}.TransmitBS(1), UEID}.UETotalSignal_ = UETotalSignal;
 
                     % Collect the results which is now stored in the primary link
                     primaryLink.calculateSNR(simParams.constants.BOLTZMANN, simParams.phy.temperature);
@@ -313,20 +314,20 @@ for iBS = 1:nBS
 
         % 绘制接收信号功率谱
         figure(iBS*100+iUE*10+3)
-        [pxx, f] = pwelch(Links{BSID, UEID}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+        [pxx, f] = pwelch(Links{BSID, UEID}.UETotalSignal_(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
 
         % 绘制接收信号时域波形
-        t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.TransmitSignal(:, 1))-1)/simParams.modulation.samplingRate;
+        t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.UETotalSignal_(:, 1))-1)/simParams.modulation.samplingRate;
         figure(iBS*100+iUE*10+4)
         subplot(2,1,1)
-        plot(t, abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        plot(t, abs(Links{BSID, UEID}.UETotalSignal_(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
         xlabel('time/s')
         ylabel('amplitude')
         subplot(2,1,2)
-        plot(t, angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        plot(t, angle(Links{BSID, UEID}.UETotalSignal_(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal phase'])
         xlabel('time/s')
         ylabel('phase')
