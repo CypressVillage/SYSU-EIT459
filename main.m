@@ -20,13 +20,6 @@ simulationScenario = 'LTEAcompliant';           % select a simulation scenario:
                                                                              
 % load parameters according to scenario                                               
 simParams = Parameters.SimulationParameters( simulationScenario );
-% 1.1 设置仿真参数
-simParams.simulation.nFrames = 20;
-simParams.simulation.sweepValue = 120;
-simParams.simulation.nAntennasBaseStation = 1;
-simParams.simulation.nAntennasUser = 1;
-simParams.modulation.nStreams = 1 ;
-simParams.modulation.precodingMatrix{1} = 1 / sqrt(2);
 
 % generate network topology and links between nodes
 [Links, BS, UE] = Topology.getTopology(simParams);
@@ -114,16 +107,6 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     % correct signal length
                     UETotalSignal = Channel.correctSignalLength(UETotalSignal, primaryLink.Modulator.WaveformObject.Nr.SamplesTotal);
                     
-%                     % plot signal spectrum
-%                     plot( (1:primaryLink.Modulator.WaveformObject.Nr.SamplesTotal).' /primaryLink.Modulator.WaveformObject.Nr.SamplesTotal * simParams.modulation.samplingRate, 20*log10(abs(fft(UETotalSignal))))
-%                     xlabel('f in Hz');
-%                     ylabel('Signal Power in dB');
-%                     xlim([0 6e6]);
-%                     ylim([-150 -50]);
-%                     grid on;
-%                     print('-dpdf','PSD_comp_','-bestfit')
-                    
-
                     % add noise
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
                     
@@ -223,68 +206,74 @@ save(['./results/results_',timeStamp]);
 fprintf(['------- Done -------', '\n']);
 toc(startTime);
 
-% % 1.2 绘制柱状图，数据在downlinkResults.userResults.BERCoded
-% subplot(2,2,1)
-% bar(downlinkResults.userResults.BERCoded.values)
-% xlabel('frame number')
-% ylabel('')
-% title('BER Coded')
 
-% subplot(2,2,2)
-% bar(downlinkResults.userResults.BERUncoded.values)
-% xlabel('frame number')
-% ylabel('')
-% title('BER Uncoded')
+% % 保存发射信号
+% var4_1 = Links{1,2}.TransmitSignal(:, 1);
+% save('TransmitSignal.mat', 'var4_1')
 
-% subplot(2,2,3)
-% bar(downlinkResults.userResults.FER.values)
-% xlabel('frame number')
-% ylabel('')
-% title('FER')
+% exp04-03 绘制每个基站所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+for iBS = 1:nBS
+    BSID = BS{iBS}.ID;
+    for iUE = 1:nUE
+        UEID = UE{iUE}.ID;
 
-% subplot(2,2,4)
-% bar(downlinkResults.userResults.throughput.values)
-% xlabel('frame number')
-% ylabel('')
-% title('throughput')
+        if isempty(Links{BSID, UEID}.Modulator)
+            continue
+        end
+        % % 绘制接收信号星座图
+        % figure(iBS*100+iUE*10+1)
+        % scatter(real(Links{BSID, UEID}.Modulator.rxData_(:, 1)), imag(Links{BSID, UEID}.Modulator.rxData_(:, 1)), '.')
+        % xlim([-1.5 1.5])
+        % ylim([-1.5 1.5])
 
-% % 2.1 绘制发送信号星座图
-% figure
-% scatter(real(Links{1,2}.TransmitSymbols{1,1}), imag(Links{1,2}.TransmitSymbols{1,1}), '.')
-% % 2.2 绘制接收信号星座图
-% figure
-% scatter(real(UETotalSignal(:, 1)), imag(UETotalSignal(:, 1)), '.')
+        % 绘制误码率
+        figure(iBS*100+iUE*10+1)
+        bar(downlinkResults.userResults(iUE).BERUncoded.values)
+        xlabel('frame number')
+        ylabel('BER Uncoded')
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' Coded BER'])
 
-% % 3.1 绘制发送信号时域波形
-% figure
-% subplot(2,1,1)
-% plot(abs(Links{1,2}.TransmitSymbols{1,1}))
-% title("发送信号幅值")
-% subplot(2,1,2)
-% plot(angle(Links{1,2}.TransmitSymbols{1,1}))
-% title("发送信号相角")
+        % 绘制吞吐量
+        figure(iBS*100+iUE*10+2)
+        bar(downlinkResults.userResults(iUE).throughput.values)
+        xlabel('frame number')
+        ylabel('throughput')
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE)])
 
-% % 3.2 绘制接收信号时域波形
-% figure
-% subplot(2,1,1)
-% plot(abs(UETotalSignal(:, 1)))
-% title("接收信号幅值")
-% subplot(2,1,2)
-% plot(angle(UETotalSignal(:, 1)))
-% title("接收信号相角")
+        % 绘制接收信号功率谱
+        figure(iBS*100+iUE*10+3)
+        [pxx, f] = pwelch(Links{BSID, UEID}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+        plot(f, 10*log10(pxx))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
 
-% 1.1 绘制发送信号功率谱
-figure
-[pxx, f] = pwelch(Links{1,2}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("发送信号功率谱")
+        % 绘制接收信号时域波形
+        figure(iBS*100+iUE*10+4)
+        subplot(2,1,1)
+        plot(abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
+        subplot(2,1,2)
+        plot(angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal phase'])
 
-% 1.2 绘制接收信号功率谱
-figure
-[pxx, f] = pwelch(UETotalSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
-plot(f, 10*log10(pxx))
-title("接收信号功率谱")
+        % % 绘制真实信道
+        % figure(iBS*100+iUE*10+3)
+        % channel = Links{BSID, UEID}.Modulator.Channel(:,:,1);
+        % x = 1:1:size(channel, 1);
+        % y = 1:1:size(channel, 2);
+        % [X, Y] = meshgrid(x, y);
+        % surf(X, Y, 10*log(abs(channel')))
+        % xlabel('subcarrier')
+        % ylabel('OFDM symbol')
+        % zlabel('channel gain')
+        % title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' real channel'])
 
-% 保存发射信号
-var4_1 = Links{1,2}.TransmitSignal(:, 1);
-save('TransmitSignal.mat', 'var4_1')
+        % % 绘制估计信道
+        % figure(iBS*100+iUE*10+4)
+        % channel = Links{BSID, UEID}.Modulator.perfectChannel_(:,:,1);
+        % surf(X, Y, 10*log(abs(channel')))
+        % xlabel('subcarrier')
+        % ylabel('OFDM symbol')
+        % zlabel('channel gain')
+        % title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
+    end
+end

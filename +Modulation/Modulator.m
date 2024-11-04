@@ -11,6 +11,8 @@ classdef Modulator < handle
 
 % Parameters
     properties
+        rxData_
+        perfectChannel_
         ModulationFormat                % Modulation Format: {'PAM', 'QAM'}
         ModulationOrder                 % Modulation Order: {4, 16, 64}
         Waveform                        % Waveform: {'OFDM', 'f-OFDM', 'FBMC', 'UFMC', 'GFDM'}
@@ -183,7 +185,8 @@ methods
         perfectChannel = 10^((txPower-30-pathloss)/20) * powerScale * channelObject.GetTransferFunction(obj.WaveformObject.GetTimeIndexMidPos,...
                                                                                                         obj.WaveformObject.Implementation.FFTSize,...
                                                                                                         obj.WaveformObject.Implementation.IntermediateFrequency+(1:obj.WaveformObject.Nr.Subcarriers));
-        
+        obj.perfectChannel_ = perfectChannel;
+
         % equalization
         switch obj.EqualizerType
             case 'One-Tap'
@@ -248,6 +251,9 @@ methods
                 nSymbols                = size(obj.Channel,2);
                 nScheduledSubcarriers   = numel(scheduledChannel)/(nSymbols*nRx*nTx);
    
+                equalizedSymbols = scheduledPseudoymbos./scheduledChannel;
+                obj.rxData_ = obj.inverseSpreadingTransform(equalizedSymbols(:, 1), nScheduledSubcarriers);
+
                 % perform LLR calculation (detection)
                 if (nTx==1) && (nRx==1)
                     % SISO detection => Zero forcing is optimal 

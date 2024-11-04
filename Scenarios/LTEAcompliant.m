@@ -35,13 +35,13 @@ scStr.simulation.saveData                   = false;                    % Set to
 scStr.simulation.sweepParam                 = {'simulation.pathloss'};  % Define the parameter to sweep over. This can be almost any simulation parameter.
                                                                         % Most likely it will be the pathloss to obtain results over SNR.
                                                                                                                                         
-scStr.simulation.sweepValue                 = linspace(140,100,8);      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
+scStr.simulation.sweepValue                 = 120;      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
 
 scStr.simulation.applySweepingTo            = [1];                      % Define the nodes (or links, depending on the sweep parameter) on which the sweep parameter will be applied (1 or 0 for each node/link).
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
                                                                         % Enter a single 1 if you want all of them to be swept over.
 % Number of simulation frames
-scStr.simulation.nFrames                    = 100;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
+scStr.simulation.nFrames                    = 20;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
 
 %% Physical Transmission Parameters
 scStr.simulation.centerFrequency            = 2.5e9;                    % center frequency
