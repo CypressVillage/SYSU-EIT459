@@ -318,13 +318,18 @@ for iBS = 1:nBS
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
 
         % 绘制接收信号时域波形
+        t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.TransmitSignal(:, 1))-1)/simParams.modulation.samplingRate;
         figure(iBS*100+iUE*10+4)
         subplot(2,1,1)
-        plot(abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        plot(t, abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
+        xlabel('time/s')
+        ylabel('amplitude')
         subplot(2,1,2)
-        plot(angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        plot(t, angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal phase'])
+        xlabel('time/s')
+        ylabel('phase')
 
         % % 绘制真实信道
         % figure(iBS*100+iUE*10+3)
