@@ -35,13 +35,13 @@ scStr.simulation.saveData                   = false;                    % Set to
 scStr.simulation.sweepParam                 = {'simulation.pathloss'};  % Define the parameter to sweep over. This can be almost any simulation parameter.
                                                                         % Most likely it will be the pathloss to obtain results over SNR.
                                                                                                                                         
-scStr.simulation.sweepValue                 = linspace(140,100,8);      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
+scStr.simulation.sweepValue                 = 110;      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
 
 scStr.simulation.applySweepingTo            = [1];                      % Define the nodes (or links, depending on the sweep parameter) on which the sweep parameter will be applied (1 or 0 for each node/link).
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
                                                                         % Enter a single 1 if you want all of them to be swept over.
 % Number of simulation frames
-scStr.simulation.nFrames                    = 100;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
+scStr.simulation.nFrames                    = 20;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
 
 %% Physical Transmission Parameters
 scStr.simulation.centerFrequency            = 2.5e9;                    % center frequency
@@ -49,8 +49,8 @@ scStr.simulation.centerFrequency            = 2.5e9;                    % center
 scStr.simulation.txPowerBaseStation         = 30;                       % base station total transmit power in dBm
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
-scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
+scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
+scStr.simulation.nAntennasUser              = 1;                        % 
 scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
@@ -94,8 +94,8 @@ scStr.feedback.enable                       = false;                    % this p
 scStr.feedback.pmi                          = false;
 scStr.feedback.ri                           = false; 
 scStr.feedback.cqi                          = true;
-scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
-scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
+scStr.modulation.nStreams                   = 1;                        % 2 active spatial stream
+scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(1);       % employed precoding matrix
 scStr.modulation.mcs                        = [8 8];
 
 %% Modulation Parameters
