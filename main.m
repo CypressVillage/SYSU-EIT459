@@ -313,17 +313,17 @@ for iBS = 1:nBS
 
         % 绘制接收信号功率谱
         figure(iBS*100+iUE*10+3)
-        [pxx, f] = pwelch(Links{BSID, UEID}.Modulator.rxData_(:, 1), [], [], [], simParams.modulation.samplingRate);
+        [pxx, f] = pwelch(Links{BSID, UEID}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
 
         % 绘制接收信号时域波形
         figure(iBS*100+iUE*10+4)
         subplot(2,1,1)
-        plot(abs(Links{BSID, UEID}.Modulator.rxData_(:, 1)))
+        plot(abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
         subplot(2,1,2)
-        plot(angle(Links{BSID, UEID}.Modulator.rxData_(:, 1)))
+        plot(angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal phase'])
 
         % % 绘制真实信道
