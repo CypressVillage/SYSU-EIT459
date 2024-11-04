@@ -226,13 +226,14 @@ for iBS = 1:nBS
         scatter(real(Links{BSID, UEID}.Modulator.rxData_(:, 1)), imag(Links{BSID, UEID}.Modulator.rxData_(:, 1)), '.')
         xlim([-1.5 1.5])
         ylim([-1.5 1.5])
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal constellation'])
 
         % 绘制误码率
         figure(iBS*100+iUE*10+2)
         bar(downlinkResults.userResults(iUE).BERUncoded.values)
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' Coded BER'])
         xlabel('frame number')
         ylabel('BER Uncoded')
-        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' Coded BER'])
 
         % 绘制吞吐量
         figure(iBS*100+iUE*10+3)
@@ -246,6 +247,8 @@ for iBS = 1:nBS
         [pxx, f] = pwelch(Links{BSID, UEID}.UETotalSignal_(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
+        xlabel('frequency/Hz')
+        ylabel('power/dB')
 
         % 绘制接收信号时域波形
         t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.UETotalSignal_(:, 1))-1)/simParams.modulation.samplingRate;
@@ -268,18 +271,18 @@ for iBS = 1:nBS
         y = 1:1:size(channel, 2);
         [X, Y] = meshgrid(x, y);
         surf(X, Y, 10*log(abs(channel')))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' real channel'])
         xlabel('subcarrier')
         ylabel('OFDM symbol')
         zlabel('channel gain')
-        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' real channel'])
 
         % 绘制估计信道
         figure(iBS*100+iUE*10+7)
         channel = Links{BSID, UEID}.Modulator.perfectChannel_(:,:,1);
         surf(X, Y, 10*log(abs(channel')))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
         xlabel('subcarrier')
         ylabel('OFDM symbol')
         zlabel('channel gain')
-        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
     end
 end
