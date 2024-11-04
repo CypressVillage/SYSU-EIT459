@@ -19,6 +19,7 @@ classdef Link < handle
         Receiver                % The receiving end (node ID).
         MUSTFarUE               % ID of the MUST FarUE.
         MUSTNearUE              % ID of the MUST NearUE.
+        UETotalSignal_
     end
     
     % Parameters
