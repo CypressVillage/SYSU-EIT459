@@ -212,7 +212,8 @@ toc(startTime);
 % var4_1 = Links{1,2}.TransmitSignal(:, 1);
 % save('TransmitSignal.mat', 'var4_1')
 
-% exp04-03 绘制每个基站所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+%% exp04-03 绘制每个基站所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+close all;
 for iBS = 1:nBS
     BSID = BS{iBS}.ID;
     for iUE = 1:nUE
@@ -242,17 +243,39 @@ for iBS = 1:nBS
         ylabel('throughput')
         title(['BS ', num2str(iBS), ' User ', num2str(iUE)])
 
-        % 绘制接收信号功率谱
+        % 绘制发送信号功率谱
         figure(iBS*100+iUE*10+4)
+        [pxx, f] = pwelch(Links{BSID, UEID}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
+        plot(f, 10*log10(pxx))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' transmit signal power spectrum'])
+        xlabel('frequency/Hz')
+        ylabel('power/dB')
+
+        % 绘制接收信号功率谱
+        figure(iBS*100+iUE*10+5)
         [pxx, f] = pwelch(Links{BSID, UEID}.UETotalSignal_(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
         xlabel('frequency/Hz')
         ylabel('power/dB')
 
+        % 绘制发送信号时域波形
+        t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.TransmitSignal(:, 1))-1)/simParams.modulation.samplingRate;
+        figure(iBS*100+iUE*10+6)
+        subplot(2,1,1)
+        plot(t, abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' transmit signal amplitude'])
+        xlabel('time/s')
+        ylabel('amplitude')
+        subplot(2,1,2)
+        plot(t, angle(Links{BSID, UEID}.TransmitSignal(:, 1)))
+        title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' transmit signal phase'])
+        xlabel('time/s')
+        ylabel('phase')
+
         % 绘制接收信号时域波形
         t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.UETotalSignal_(:, 1))-1)/simParams.modulation.samplingRate;
-        figure(iBS*100+iUE*10+5)
+        figure(iBS*100+iUE*10+7)
         subplot(2,1,1)
         plot(t, abs(Links{BSID, UEID}.UETotalSignal_(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
@@ -265,7 +288,7 @@ for iBS = 1:nBS
         ylabel('phase')
 
         % 绘制真实信道
-        figure(iBS*100+iUE*10+6)
+        figure(iBS*100+iUE*10+8)
         channel = Links{BSID, UEID}.Modulator.Channel(:,:,1);
         x = 1:1:size(channel, 1);
         y = 1:1:size(channel, 2);
@@ -277,7 +300,7 @@ for iBS = 1:nBS
         zlabel('channel gain')
 
         % 绘制估计信道
-        figure(iBS*100+iUE*10+7)
+        figure(iBS*100+iUE*10+9)
         channel = Links{BSID, UEID}.Modulator.perfectChannel_(:,:,1);
         surf(X, Y, 10*log(abs(channel')))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
