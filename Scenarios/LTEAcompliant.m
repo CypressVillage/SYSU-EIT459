@@ -65,7 +65,8 @@ scStr.channel.dopplerModel                  = 'Discrete-Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'PedestrianA';  
+% PedestrianA Flat ExtendedPedestrianA ExtendedVehicularA TDL-A_0ns TDL-B_0ns
+scStr.channel.powerDelayProfile             = 'TDL-A_0ns';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
