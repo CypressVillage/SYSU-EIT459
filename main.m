@@ -307,5 +307,7 @@ for iBS = 1:nBS
         xlabel('subcarrier')
         ylabel('OFDM symbol')
         zlabel('channel gain')
+
+        Links{BSID, UEID}.Channel.PlotTimeCorrelation(Links{BSID, UEID}.Modulator.WaveformObject.Implementation.TimeSpacing);
     end
 end

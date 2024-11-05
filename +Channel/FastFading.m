@@ -394,6 +394,7 @@ classdef FastFading < handle
         function [TimeCorrelation,Time]=GetTimeCorrelation(obj)
             % returns the time-autocorrelation function of the channel.
 
+            Time = -obj.PHY.dt*(obj.Nr.SamplesTotal-1):obj.PHY.dt:obj.PHY.dt*(obj.Nr.SamplesTotal-1);
             if obj.PHY.MaximumDopplerShift>0
                 if obj.Implementation.UseDiscreteDopplerSpectrum
                     % Can be implemented similar as the frequency
