@@ -310,5 +310,7 @@ for iBS = 1:nBS
 
         Links{BSID, UEID}.Channel.PlotTimeCorrelation(Links{BSID, UEID}.Modulator.WaveformObject.Implementation.TimeSpacing);
         Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
+        figure()
+        Links{BSID, UEID}.Channel.PlotPowerDelayProfile();
     end
 end
