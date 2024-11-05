@@ -141,6 +141,30 @@ classdef FastFading < handle
                             [-0.03 -22.03 -15.8 -18.1 -19.8 -22.9 -22.4 -18.6 -20.8 -22.6 -22.3 -25.6 -20.2 -29.8 -29.2];
                         PowerDelayProfileINdB_DelayIndex(2,:) = ...
                             DesiredRMSdelaySpread*[0 0 0.5133 0.5440 0.5630 0.5440 0.7112 1.9092 1.9293 1.9589 2.6426 3.7136 5.4524 12.0034 20.6519];
+                    case 'SUI-1'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -15 -20;
+                            0 0.4e-6 0.9e-6];
+                    case 'SUI-2'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -12 -15;
+                            0 0.4e-6 1.1e-6];
+                    case 'SUI-3'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -5 -10;
+                            0 0.4e-6 0.9e-6];
+                    case 'SUI-4'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -4 -8;
+                            0 1.5e-6 4e-6];
+                    case 'SUI-5'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -5 -10;
+                            0 4e-6 10e-6];
+                    case 'SUI-6'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -10 -14;
+                            0 14e-6 20e-6];
                     otherwise
                         error('Power delay profile model not supported!');
                 end
