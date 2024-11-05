@@ -309,5 +309,6 @@ for iBS = 1:nBS
         zlabel('channel gain')
 
         Links{BSID, UEID}.Channel.PlotTimeCorrelation(Links{BSID, UEID}.Modulator.WaveformObject.Implementation.TimeSpacing);
+        Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
     end
 end
