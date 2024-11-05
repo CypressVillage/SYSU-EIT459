@@ -165,6 +165,22 @@ classdef FastFading < handle
                         PowerDelayProfileINdB_DelayIndex = [...
                             0 -10 -14;
                             0 14e-6 20e-6];
+                    case 'COST207-RA'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            0 -4 -8 -12 -16 -20;
+                            0 0.1e-6 0.2e-6 0.3e-6 0.4e-6 0.5e-6];
+                    case 'COST207-TU'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            -3 0 -2 -6 -8 -10;
+                            0 0.2e-6 0.5e-6 1.6e-6 2.3e-6 5.0e-6];
+                    case 'COST207-BU'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            -7 -3 -1 0 -2 -6 -7 -1 -2 -7 -10 -15;
+                            0 0.2e-6 0.4e-6 0.8e-6 1.6e-6 2.2e-6 3.2e-6 5.0e-6 6.0e-6 7.2e-6 8.2e-6 10.0e-6];
+                    case 'COST207-HT'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            -10 -8 -6 -4 0 0 -4 -8 -9 -10 -12 -14;
+                            0 0.2e-6 0.4e-6 0.6e-6 0.8e-6 2.0e-6 2.4e-6 15.0e-6 15.2e-6 15.8e-6 17.2e-6 20.0e-6];
                     otherwise
                         error('Power delay profile model not supported!');
                 end
