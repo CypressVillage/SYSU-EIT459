@@ -116,6 +116,10 @@ classdef FastFading < handle
                         PowerDelayProfileINdB_DelayIndex = [...
                             0,-1.5,-1.4,-3.6,-0.6,-9.1,-7,-12,-16.9; 
                             0,30e-9,150e-9,310e-9,370e-9,710e-9,1090e-9,1730e-9,2510e-9];
+                    case 'ExtendedTypicalUrban'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                            -1,-1,-1,0,0,0-3,-5,-7;
+                            0,50e-9,120e-9,200e-9,230e-9,500e-9,1600e-9,2300e-9,5000e-9];
                     case 'TDL-A'
                         PowerDelayProfileINdB_DelayIndex(1,:) = ...
                             [-13.4,0,-2.2,-4,-6,-8.2,-9.9,-10.5,-7.5,-15.9,-6.6,-16.7,-12.4,-15.2,-10.8,-11.3,-12.7,-16.2,-18.3,-18.9,-16.6,-19.9,-29.7];
