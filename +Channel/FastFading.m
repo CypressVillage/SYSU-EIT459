@@ -131,7 +131,17 @@ classdef FastFading < handle
                             [-4.4,-1.2,-3.5,-5.2,-2.5,0,-2.2,-3.9,-7.4,-7.1,-10.7,-11.1,-5.1,-6.8,-8.7,-13.2,-13.9,-13.9,-15.8,-17.1,-16,-15.7,-21.6,-22.8];
                         PowerDelayProfileINdB_DelayIndex(2,:) = ...
                             DesiredRMSdelaySpread*[0,0.2099,0.2219,0.2329,0.2176,0.6366,0.6448,0.6560,0.6584,0.7935,0.8213,0.9336,1.2285,1.3083,2.1704,2.7105,4.2589,4.6003,5.4902,5.6077,6.3065,6.6374,7.0427,8.6523];  
-                  otherwise
+                    case 'TDL-D'
+                        PowerDelayProfileINdB_DelayIndex(1,:) = ...
+                            [-0.2 -13.5 -18.8 -21 -22.8 -17.9 -20.1 -21.9 -22.9 -27.8 -23.6 -24.8 -30.0 -27.7];
+                        PowerDelayProfileINdB_DelayIndex(2,:) = ...
+                            DesiredRMSdelaySpread*[0 0 0.035 0.612 1.363 1.405 1.804 2.596 1.775 4.042 7.937 9.424 9.708 12.525];
+                    case 'TDL-E'
+                        PowerDelayProfileINdB_DelayIndex(1,:) = ...
+                            [-0.03 -22.03 -15.8 -18.1 -19.8 -22.9 -22.4 -18.6 -20.8 -22.6 -22.3 -25.6 -20.2 -29.8 -29.2];
+                        PowerDelayProfileINdB_DelayIndex(2,:) = ...
+                            DesiredRMSdelaySpread*[0 0 0.5133 0.5440 0.5630 0.5440 0.7112 1.9092 1.9293 1.9589 2.6426 3.7136 5.4524 12.0034 20.6519];
+                    otherwise
                         error('Power delay profile model not supported!');
                 end
                 IndexDelays = round(PowerDelayProfileINdB_DelayIndex(2,:)./obj.PHY.dt)+1;
