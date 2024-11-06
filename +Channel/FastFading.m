@@ -116,9 +116,9 @@ classdef FastFading < handle
                         PowerDelayProfileINdB_DelayIndex = [...
                             0,-1.5,-1.4,-3.6,-0.6,-9.1,-7,-12,-16.9; 
                             0,30e-9,150e-9,310e-9,370e-9,710e-9,1090e-9,1730e-9,2510e-9];
-                    case 'ExtendedTypicalUrban'
+                    case {'ExtendedTypicalUrban', 'ETU'}
                         PowerDelayProfileINdB_DelayIndex = [...
-                            -1,-1,-1,0,0,0-3,-5,-7;
+                            -1,-1,-1,0,0,0,-3,-5,-7;
                             0,50e-9,120e-9,200e-9,230e-9,500e-9,1600e-9,2300e-9,5000e-9];
                     case {'HighSpeedTrain', 'HST'}
                         PowerDelayProfileINdB_DelayIndex = [...
