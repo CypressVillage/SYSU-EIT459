@@ -61,7 +61,7 @@ scStr.simulation.amplifierOBO               = [1];                      % Amplif
 scStr.simulation.smoothnessFactor           = [3];                      % Smoothness factor for the Rapp model, per BS, >=0
 
 %% Channel Parameters
-scStr.channel.dopplerModel                  = 'Discrete-Jakes';
+scStr.channel.dopplerModel                  = 'Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
