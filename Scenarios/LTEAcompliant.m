@@ -51,7 +51,7 @@ scStr.simulation.txPowerUser                = 30;                       % user t
 
 scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
 scStr.simulation.nAntennasUser              = 2;                        % 
-scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
+scStr.simulation.userVelocity               = 35/3.6;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
 
