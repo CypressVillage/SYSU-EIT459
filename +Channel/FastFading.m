@@ -581,10 +581,11 @@ classdef FastFading < handle
             
             Tau = (0:(length(obj.Implementation.PowerDelayProfileNormalized))-1)*obj.PHY.dt;
             PowerDelayProfile = obj.Implementation.PowerDelayProfileNormalized;
-            if nargout==0
+            % if nargout==0
                 DesiredTemp = 10.^(obj.PHY.DesiredPowerDelayProfiledB(1,:)/10);
                 DesiredTemp = DesiredTemp/sum(DesiredTemp);
                 RMSDelaySpread = obj.GetRmsDelaySpread;
+                figure()
                 stem(obj.PHY.DesiredPowerDelayProfiledB(2,:)/1e-6,DesiredTemp,'-x red');
                 hold on;
                 stem(Tau/1e-6,PowerDelayProfile,'-o  blue');
@@ -594,7 +595,7 @@ classdef FastFading < handle
                 ylabel('Power Delay Profile');
                 title(['RMS Delay Spread: ' num2str(round(RMSDelaySpread/1e-9)) 'ns']);
                 legend({'Desired Delay Taps','Chosen Delay Taps (due to sampling)'});  
-            end
+            % end
         end
         
     end
