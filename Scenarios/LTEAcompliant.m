@@ -94,9 +94,9 @@ scStr.feedback.enable                       = false;                    % this p
 scStr.feedback.pmi                          = false;
 scStr.feedback.ri                           = false; 
 scStr.feedback.cqi                          = true;
-scStr.modulation.nStreams                   = 2;                        % 2 active spatial stream
-scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(2);       % employed precoding matrix
-scStr.modulation.mcs                        = 8;
+scStr.modulation.nStreams                   = 1;                        % 2 active spatial stream
+scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(1);       % employed precoding matrix
+scStr.modulation.mcs                        = 3;
 
 %% Modulation Parameters
 % waveform
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['none:144,UE1:156'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:300'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
