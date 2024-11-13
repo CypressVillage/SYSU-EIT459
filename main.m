@@ -309,19 +309,22 @@ for iBS = 1:nBS
         zlabel('channel gain')
 
         Links{BSID, UEID}.Channel.PlotTimeCorrelation(Links{BSID, UEID}.Modulator.WaveformObject.Implementation.TimeSpacing);
-        [FCF_real, ~] = Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
+        [FCF_real, frequency] = Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
         [PDP_real, tau] = Links{BSID, UEID}.Channel.PlotPowerDelayProfile();
-
+        
         % CFR = Links{BSID, UEID}.Modulator.Channel(:,:,1);
         % [numSubcarriers, numOFDMSymbols, numFrames] = size(CFR);
         % CIR = zeros(numSubcarriers, numOFDMSymbols, numFrames);
         % CIR = ifft(CFR);
 
         PDP_estimated = mean(abs(Links{BSID, UEID}.Channel.ImpulseResponse_TotalFrame_), [1 3]).^2;
-        PDP_estimated = PDP_estimated / sum(PDP_estimated);
+        PDP_estimated = PDP_estimated' / sum(PDP_estimated);
+        FCF_estimated = fft([PDP_estimated; zeros(Links{BSID, UEID}.Channel.Nr.SamplesTotal - length(PDP_estimated), 1)]);
+        FCF_estimated = circshift(FCF_estimated, [ceil(Links{BSID, UEID}.Channel.Nr.SamplesTotal / 2) 1]);
 
         % 计算 PDP 和 FCF 的均方误差（MSE）
-        MSE_PDP = mean((PDP_estimated - PDP_real).^2, 'all');
+        MSE_PDP = mean(abs(PDP_estimated - PDP_real).^2, 'all');
+        MSE_FCF = mean(abs(FCF_estimated - FCF_real).^2, 'all');
 
         % 绘制估计和真实的 PDP
         figure;
@@ -333,7 +336,18 @@ for iBS = 1:nBS
         xlabel('Delay');
         ylabel('Power');
 
+        % 绘制估计和真实的 FCF
+        figure;
+        plot(frequency, abs(FCF_real));
+        hold on;
+        plot(frequency, abs(FCF_estimated), 'r--');
+        title('Frequency Correlation Function (FCF)');
+        legend('Real FCF', 'Estimated FCF');
+        xlabel('Subcarrier');
+        ylabel('Power');
+
         % 显示 MSE
         disp(['MSE of PDP: ', num2str(MSE_PDP)]);
+        disp(['MSE of FCF: ', num2str(MSE_FCF)]);
     end
 end
