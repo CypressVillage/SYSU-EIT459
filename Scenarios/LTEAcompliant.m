@@ -51,7 +51,7 @@ scStr.simulation.txPowerUser                = 30;                       % user t
 
 scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
 scStr.simulation.nAntennasUser              = 1;                        % 
-scStr.simulation.userVelocity               = 3/3.6;                        % UE velocity in m/s
+scStr.simulation.userVelocity               = 60/3.6;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
 
@@ -65,7 +65,7 @@ scStr.channel.dopplerModel                  = 'Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'ExtendedPedestrianA';  
+scStr.channel.powerDelayProfile             = 'ETU';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
