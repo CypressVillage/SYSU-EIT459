@@ -309,8 +309,31 @@ for iBS = 1:nBS
         zlabel('channel gain')
 
         Links{BSID, UEID}.Channel.PlotTimeCorrelation(Links{BSID, UEID}.Modulator.WaveformObject.Implementation.TimeSpacing);
-        Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
-        figure()
-        Links{BSID, UEID}.Channel.PlotPowerDelayProfile();
+        [FCF_real, ~] = Links{BSID, UEID}.Channel.PlotFrequencyCorrelation(2);
+        [PDP_real, tau] = Links{BSID, UEID}.Channel.PlotPowerDelayProfile();
+
+        % CFR = Links{BSID, UEID}.Modulator.Channel(:,:,1);
+        % [numSubcarriers, numOFDMSymbols, numFrames] = size(CFR);
+        % CIR = zeros(numSubcarriers, numOFDMSymbols, numFrames);
+        % CIR = ifft(CFR);
+
+        PDP_estimated = mean(abs(Links{BSID, UEID}.Channel.ImpulseResponse_TotalFrame_), [1 3]).^2;
+        PDP_estimated = PDP_estimated / sum(PDP_estimated);
+
+        % 计算 PDP 和 FCF 的均方误差（MSE）
+        MSE_PDP = mean((PDP_estimated - PDP_real).^2, 'all');
+
+        % 绘制估计和真实的 PDP
+        figure;
+        stem(tau, PDP_real, 'bx');
+        hold on;
+        stem(tau, PDP_estimated, 'r--');
+        title('Power Delay Profile (PDP)');
+        legend('Real PDP', 'Estimated PDP');
+        xlabel('Delay');
+        ylabel('Power');
+
+        % 显示 MSE
+        disp(['MSE of PDP: ', num2str(MSE_PDP)]);
     end
 end
