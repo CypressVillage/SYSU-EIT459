@@ -202,7 +202,7 @@ tmpStr = datestr(now);
 tmpStr = strrep(tmpStr,':','_');
 timeStamp = strrep(tmpStr,' ','_');
 % save results (complete workspace)
-save(['./results/results_',timeStamp]);
+% save(['./results/results_',timeStamp]);
 
 fprintf(['------- Done -------', '\n']);
 toc(startTime);
