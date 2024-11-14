@@ -328,21 +328,27 @@ for iBS = 1:nBS
 
         % 绘制估计和真实的 PDP
         figure;
+        subplot(2,1,1)
         stem(tau, PDP_real, 'bx');
-        hold on;
+        title('Real Power Delay Profile (PDP)');
+        xlabel('Delay');
+        ylabel('Power');
+        subplot(2,1,2)
         stem(tau, PDP_estimated, 'r--');
-        title('Power Delay Profile (PDP)');
-        legend('Real PDP', 'Estimated PDP');
+        title('Estimated Power Delay Profile (PDP)');
         xlabel('Delay');
         ylabel('Power');
 
         % 绘制估计和真实的 FCF
         figure;
+        subplot(2,1,1)
         plot(frequency, abs(FCF_real));
-        hold on;
+        title('Real Frequency Correlation Function (FCF)');
+        xlabel('Subcarrier');
+        ylabel('Power');
+        subplot(2,1,2)
         plot(frequency, abs(FCF_estimated), 'r--');
-        title('Frequency Correlation Function (FCF)');
-        legend('Real FCF', 'Estimated FCF');
+        title('Estimated Frequency Correlation Function (FCF)');
         xlabel('Subcarrier');
         ylabel('Power');
 
