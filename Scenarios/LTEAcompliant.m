@@ -35,7 +35,7 @@ scStr.simulation.saveData                   = false;                    % Set to
 scStr.simulation.sweepParam                 = {'simulation.pathloss'};  % Define the parameter to sweep over. This can be almost any simulation parameter.
                                                                         % Most likely it will be the pathloss to obtain results over SNR.
                                                                                                                                         
-scStr.simulation.sweepValue                 = 120;      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
+scStr.simulation.sweepValue                 = 90;      % Define parameter values to sweep over. A good starting point for the pathloss is 150 to 110.
 
 scStr.simulation.applySweepingTo            = [1];                      % Define the nodes (or links, depending on the sweep parameter) on which the sweep parameter will be applied (1 or 0 for each node/link).
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
@@ -49,8 +49,8 @@ scStr.simulation.centerFrequency            = 2.5e9;                    % center
 scStr.simulation.txPowerBaseStation         = 30;                       % base station total transmit power in dBm
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
-scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
+scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
+scStr.simulation.nAntennasUser              = 1;                        % 
 scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
@@ -103,11 +103,11 @@ scStr.modulation.mcs                        = 3;
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 1024;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 15e3;                     
-scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
-scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
-scStr.modulation.samplingRate               = 15e3 * 2048;              % sampling rate
+scStr.modulation.nSymbolsTotal              = 140;                       % 15 symbols out of which one is used for all CPs
+scStr.modulation.nGuardSymbols              = 10;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
+scStr.modulation.samplingRate               = 15.36e6;              % sampling rate
 
 %% Channel Coding Parameters
 scStr.coding.code                           = {'Turbo'};
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:300'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:1024'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
