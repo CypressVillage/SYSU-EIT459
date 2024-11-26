@@ -19,7 +19,6 @@ classdef FastFading < handle
         Nr
         Implementation
         ImpulseResponse
-        ImpulseResponse_TotalFrame_ = [];
     end
     
     methods
@@ -379,8 +378,6 @@ classdef FastFading < handle
                     end
                 end
             end
-            % store ImpulseResponse for every frame
-            obj.ImpulseResponse_TotalFrame_(:, :, frame+1) = obj.ImpulseResponse;
         end 
         
         

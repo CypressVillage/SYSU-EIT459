@@ -317,43 +317,43 @@ for iBS = 1:nBS
         % CIR = zeros(numSubcarriers, numOFDMSymbols, numFrames);
         % CIR = ifft(CFR);
 
-        PDP_estimated = mean(abs(Links{BSID, UEID}.Channel.ImpulseResponse_TotalFrame_), [1 3]).^2;
-        PDP_estimated = PDP_estimated' / sum(PDP_estimated);
-        FCF_estimated = fft([PDP_estimated; zeros(Links{BSID, UEID}.Channel.Nr.SamplesTotal - length(PDP_estimated), 1)]);
-        FCF_estimated = circshift(FCF_estimated, [ceil(Links{BSID, UEID}.Channel.Nr.SamplesTotal / 2) 1]);
+        % PDP_estimated = mean(abs(Links{BSID, UEID}.Channel.ImpulseResponse_TotalFrame_), [1 3]).^2;
+        % PDP_estimated = PDP_estimated' / sum(PDP_estimated);
+        % FCF_estimated = fft([PDP_estimated; zeros(Links{BSID, UEID}.Channel.Nr.SamplesTotal - length(PDP_estimated), 1)]);
+        % FCF_estimated = circshift(FCF_estimated, [ceil(Links{BSID, UEID}.Channel.Nr.SamplesTotal / 2) 1]);
 
-        % 计算 PDP 和 FCF 的均方误差（MSE）
-        MSE_PDP = mean(abs(PDP_estimated - PDP_real).^2, 'all');
-        MSE_FCF = mean(abs(FCF_estimated - FCF_real).^2, 'all');
+        % % 计算 PDP 和 FCF 的均方误差（MSE）
+        % MSE_PDP = mean(abs(PDP_estimated - PDP_real).^2, 'all');
+        % MSE_FCF = mean(abs(FCF_estimated - FCF_real).^2, 'all');
 
-        % 绘制估计和真实的 PDP
-        figure;
-        subplot(2,1,1)
-        stem(tau, PDP_real, 'bx');
-        title('Real Power Delay Profile (PDP)');
-        xlabel('Delay');
-        ylabel('Power');
-        subplot(2,1,2)
-        stem(tau, PDP_estimated, 'r--');
-        title('Estimated Power Delay Profile (PDP)');
-        xlabel('Delay');
-        ylabel('Power');
+        % % 绘制估计和真实的 PDP
+        % figure;
+        % subplot(2,1,1)
+        % stem(tau, PDP_real, 'bx');
+        % title('Real Power Delay Profile (PDP)');
+        % xlabel('Delay');
+        % ylabel('Power');
+        % subplot(2,1,2)
+        % stem(tau, PDP_estimated, 'r--');
+        % title('Estimated Power Delay Profile (PDP)');
+        % xlabel('Delay');
+        % ylabel('Power');
 
-        % 绘制估计和真实的 FCF
-        figure;
-        subplot(2,1,1)
-        plot(frequency, abs(FCF_real));
-        title('Real Frequency Correlation Function (FCF)');
-        xlabel('Subcarrier');
-        ylabel('Power');
-        subplot(2,1,2)
-        plot(frequency, abs(FCF_estimated), 'r--');
-        title('Estimated Frequency Correlation Function (FCF)');
-        xlabel('Subcarrier');
-        ylabel('Power');
+        % % 绘制估计和真实的 FCF
+        % figure;
+        % subplot(2,1,1)
+        % plot(frequency, abs(FCF_real));
+        % title('Real Frequency Correlation Function (FCF)');
+        % xlabel('Subcarrier');
+        % ylabel('Power');
+        % subplot(2,1,2)
+        % plot(frequency, abs(FCF_estimated), 'r--');
+        % title('Estimated Frequency Correlation Function (FCF)');
+        % xlabel('Subcarrier');
+        % ylabel('Power');
 
-        % 显示 MSE
-        disp(['MSE of PDP: ', num2str(MSE_PDP)]);
-        disp(['MSE of FCF: ', num2str(MSE_FCF)]);
+        % % 显示 MSE
+        % disp(['MSE of PDP: ', num2str(MSE_PDP)]);
+        % disp(['MSE of FCF: ', num2str(MSE_FCF)]);
     end
 end
