@@ -189,6 +189,27 @@ classdef FastFading < handle
                         PowerDelayProfileINdB_DelayIndex = [...
                             -10 -8 -6 -4 0 0 -4 -8 -9 -10 -12 -14;
                             0 0.2e-6 0.4e-6 0.6e-6 0.8e-6 2.0e-6 2.4e-6 15.0e-6 15.2e-6 15.8e-6 17.2e-6 20.0e-6];
+                    % 任取五种信道
+                    case 'A1-LOS'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                        0 -15.1 -16.9 -15.8 -13.5 -15.1 -17.3 -19.1 -19.2 -23.5 -18.3 -23.3 -29.1 -14.2 -21.6 -23.4;
+                        0 5e-9 10e-9 10e-9 25e-9 50e-9 55e-9 60e-9 65e-9 75e-9 75e-9 115e-9 115e-9 145e-9 195e-9 350e-9];
+                    case 'A2-NLOS'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                        -3.0 -5.2 -7.0 -8.7 -3.7 -11.9 -16.2 -6.9 -3.4 -5.6 -7.3 -10.3 -20.7 -16.0 -21.0 -22.9;
+                        0 5e-9 10e-9 0e-9 5e-9 10e-9 35e-9 35e-9 65e-9 70e-9 75e-9 120e-9 125e-9 195e-9 250e-9 305e-9];
+                    case 'B1-LOS'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                        0.0 -10.5 -12.7 -14.5 -14.8 -13.6 -15.8 -17.6 -13.9 -17.8 -19.6 -31.4;
+                        0 30e-9 35e-9 40e-9 55e-9 60e-9 65e-9 70e-9 105e-9 115e-9 250e-9 460e-9];
+                    case 'B3-LOS'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                        0.0 -9.6 -11.8 -13.6 -14.5 -12.8 -13.7 -14.1 -16.4 -18.1 -12.6 -15.2 -23.3 -27.7;
+                        0 0 5e-9 10e-9 15e-9 25e-9 40e-9 40e-9 45e-9 50e-9 90e-9 130e-9 185e-9 280e-9];
+                    case 'C1-NLOS'
+                        PowerDelayProfileINdB_DelayIndex = [...
+                        -3.0 -5.2 -7.0 -7.5 -10.5 -3.2 -6.1 -8.3 -10.1 -14.0 -6.4 -3.1 -4.6 -8.0 -7.2 -3.1 -9.5 -22.4;
+                        0 5e-9 10e-9 25e-9 35e-9 35e-9 45e-9 50e-9 55e-9 65e-9 65e-9 75e-9 145e-9 160e-9 195e-9 200e-9 205e-9 770e-9];
                     otherwise
                         error('Power delay profile model not supported!');
                 end
