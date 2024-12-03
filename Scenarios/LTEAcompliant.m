@@ -65,7 +65,7 @@ scStr.channel.dopplerModel                  = 'Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
-scStr.channel.powerDelayProfile             = 'A2-NLOS';  
+scStr.channel.powerDelayProfile             = 'B1-LOS';  
 scStr.channel.K                             = 0;
 scStr.channel.delta                         = 1;
 
