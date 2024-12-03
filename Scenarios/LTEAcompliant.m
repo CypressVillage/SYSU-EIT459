@@ -61,7 +61,7 @@ scStr.simulation.amplifierOBO               = [1];                      % Amplif
 scStr.simulation.smoothnessFactor           = [3];                      % Smoothness factor for the Rapp model, per BS, >=0
 
 %% Channel Parameters
-scStr.channel.dopplerModel                  = 'Discrete-Jakes';
+scStr.channel.dopplerModel                  = 'Jakes';
 scStr.channel.timeCorrelation               = false;
 scStr.channel.spatialCorrelation            = 'none';
 scStr.channel.nPaths                        = 50;                   
@@ -83,7 +83,7 @@ scStr.layerMapping.mode                     = 'LTE';
 scStr.layerMapping.table.Uplink             = {1;2;[1,2]};
 scStr.layerMapping.table.Downlink           = {1;2;[1,2]};
 % MIMO mode
-scStr.modulation.transmissionMode           = 'CLSM';  
+scStr.modulation.transmissionMode           = 'custom';  
 scStr.modulation.delayDiversity             = 1;
 %% Feedback Parameters
 scStr.feedback.delay                        = 0;
