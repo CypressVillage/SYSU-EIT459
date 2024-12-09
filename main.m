@@ -366,5 +366,25 @@ for iBS = 1:nBS
         E_in = sum(abs(psd(1:ceil(B/df))).^2);
         E_oobe = E - E_in;
         disp(['OOBE: ', num2str(E_oobe/E)]);
+
+        % 绘制发送信号的PSD三维图，横轴为OFDM符号，纵轴为子载波个数
+        figure;
+        OFDMSymbol = floor(length(Links{BSID, UEID}.TransmitSignal) / simParams.modulation.numerOfSubcarriers);
+        psd = fft(reshape(Links{BSID, UEID}.TransmitSignal(1:OFDMSymbol*simParams.modulation.numerOfSubcarriers), [], OFDMSymbol));
+        mesh(10*log10(abs(psd)));
+        title('Transmit Signal PSD');
+        xlabel('OFDM Symbol');
+        ylabel('Subcarrier');
+        zlabel('Power/dB');
+
+        % 绘制接收信号的PSD三维图，横轴为OFDM符号，纵轴为子载波个数
+        figure;
+        OFDMSymbol = floor(length(Links{BSID, UEID}.UETotalSignal_) / simParams.modulation.numerOfSubcarriers);
+        psd = fft(reshape(Links{BSID, UEID}.UETotalSignal_(1:OFDMSymbol*simParams.modulation.numerOfSubcarriers), [], OFDMSymbol));
+        mesh(10*log10(abs(psd)));
+        title('Receive Signal PSD');
+        xlabel('OFDM Symbol');
+        ylabel('Subcarrier');
+        zlabel('Power/dB');
     end
 end
