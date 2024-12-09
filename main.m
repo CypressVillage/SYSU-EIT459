@@ -212,7 +212,7 @@ toc(startTime);
 % var4_1 = Links{1,2}.TransmitSignal(:, 1);
 % save('TransmitSignal.mat', 'var4_1')
 
-%% exp04-03 绘制每个基站所有用户接收信号星座图，吞吐量，真实信道，频域信道估计
+%% 绘图
 close all;
 for iBS = 1:nBS
     BSID = BS{iBS}.ID;
@@ -223,28 +223,32 @@ for iBS = 1:nBS
             continue
         end
         % 绘制接收信号星座图
-        figure(iBS*100+iUE*10+1)
+        figure(iBS*1000+iUE*100+1)
+        set(gcf, 'Name', '接收信号星座图');
         scatter(real(Links{BSID, UEID}.Modulator.rxData_(:, 1)), imag(Links{BSID, UEID}.Modulator.rxData_(:, 1)), '.')
         xlim([-1.5 1.5])
         ylim([-1.5 1.5])
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal constellation'])
 
         % 绘制误码率
-        figure(iBS*100+iUE*10+2)
+        figure(iBS*1000+iUE*100+2)
+        set(gcf, 'Name', '误码率')
         bar(downlinkResults.userResults(iUE).BERUncoded.values)
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' Coded BER'])
         xlabel('frame number')
         ylabel('BER Uncoded')
 
         % 绘制吞吐量
-        figure(iBS*100+iUE*10+3)
+        figure(iBS*1000+iUE*100+3)
+        set(gcf, 'Name', '吞吐量')
         bar(downlinkResults.userResults(iUE).throughput.values)
         xlabel('frame number')
         ylabel('throughput')
         title(['BS ', num2str(iBS), ' User ', num2str(iUE)])
 
         % 绘制发送信号功率谱
-        figure(iBS*100+iUE*10+4)
+        figure(iBS*1000+iUE*100+4)
+        set(gcf, 'Name', '发送信号功率谱')
         [pxx, f] = pwelch(Links{BSID, UEID}.TransmitSignal(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' transmit signal power spectrum'])
@@ -252,7 +256,8 @@ for iBS = 1:nBS
         ylabel('power/dB')
 
         % 绘制接收信号功率谱
-        figure(iBS*100+iUE*10+5)
+        figure(iBS*1000+iUE*100+5)
+        set(gcf, 'Name', '接收信号功率谱')
         [pxx, f] = pwelch(Links{BSID, UEID}.UETotalSignal_(:, 1), [], [], [], simParams.modulation.samplingRate);
         plot(f, 10*log10(pxx))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal power spectrum'])
@@ -260,8 +265,9 @@ for iBS = 1:nBS
         ylabel('power/dB')
 
         % 绘制发送信号时域波形
+        figure(iBS*1000+iUE*100+6)
+        set(gcf, 'Name', '发送信号时域波形')
         t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.TransmitSignal(:, 1))-1)/simParams.modulation.samplingRate;
-        figure(iBS*100+iUE*10+6)
         subplot(2,1,1)
         plot(t, abs(Links{BSID, UEID}.TransmitSignal(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' transmit signal amplitude'])
@@ -274,8 +280,9 @@ for iBS = 1:nBS
         ylabel('phase')
 
         % 绘制接收信号时域波形
+        figure(iBS*1000+iUE*100+7)
+        set(gcf, 'Name', '接收信号时域波形')
         t = 0:1/simParams.modulation.samplingRate:(length(Links{BSID, UEID}.UETotalSignal_(:, 1))-1)/simParams.modulation.samplingRate;
-        figure(iBS*100+iUE*10+7)
         subplot(2,1,1)
         plot(t, abs(Links{BSID, UEID}.UETotalSignal_(:, 1)))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' received signal amplitude'])
@@ -288,7 +295,8 @@ for iBS = 1:nBS
         ylabel('phase')
 
         % 绘制真实信道
-        figure(iBS*100+iUE*10+8)
+        figure(iBS*1000+iUE*100+8)
+        set(gcf, 'Name', '真实信道')
         channel = Links{BSID, UEID}.Modulator.Channel(:,:,1);
         x = 1:1:size(channel, 1);
         y = 1:1:size(channel, 2);
@@ -300,7 +308,8 @@ for iBS = 1:nBS
         zlabel('channel gain')
 
         % 绘制估计信道
-        figure(iBS*100+iUE*10+9)
+        figure(iBS*1000+iUE*100+9)
+        set(gcf, 'Name', '估计信道')
         channel = Links{BSID, UEID}.Modulator.perfectChannel_(:,:,1);
         surf(X, Y, 10*log(abs(channel')))
         title(['BS ', num2str(iBS), ' User ', num2str(iUE), ' estimated channel'])
@@ -326,7 +335,8 @@ for iBS = 1:nBS
         MSE_FCF = mean(abs(FCF_estimated - FCF_real).^2, 'all');
 
         % 绘制估计和真实的 PDP
-        figure;
+        figure(iBS*1000+iUE*100+10)
+        set(gcf, 'Name', 'PDP对比')
         subplot(2,1,1)
         stem(tau, PDP_real, 'bx');
         title('Real Power Delay Profile (PDP)');
@@ -339,7 +349,8 @@ for iBS = 1:nBS
         ylabel('Power');
 
         % 绘制估计和真实的 FCF
-        figure;
+        figure(iBS*1000+iUE*100+11)
+        set(gcf, 'Name', 'FCF对比')
         subplot(2,1,1)
         plot(frequency, abs(FCF_real));
         title('Real Frequency Correlation Function (FCF)');
@@ -368,7 +379,8 @@ for iBS = 1:nBS
         disp(['OOBE: ', num2str(E_oobe/E)]);
 
         % 绘制发送信号的PSD三维图，横轴为OFDM符号，纵轴为子载波个数
-        figure;
+        figure(iBS*1000+iUE*100+12)
+        set(gcf, 'Name', '发送信号PSD');
         OFDMSymbol = floor(length(Links{BSID, UEID}.TransmitSignal) / simParams.modulation.numerOfSubcarriers);
         psd = fft(reshape(Links{BSID, UEID}.TransmitSignal(1:OFDMSymbol*simParams.modulation.numerOfSubcarriers), [], OFDMSymbol));
         mesh(10*log10(abs(psd)));
@@ -378,7 +390,8 @@ for iBS = 1:nBS
         zlabel('Power/dB');
 
         % 绘制接收信号的PSD三维图，横轴为OFDM符号，纵轴为子载波个数
-        figure;
+        figure(iBS*1000+iUE*100+13)
+        set(gcf, 'Name', '接收信号PSD');
         OFDMSymbol = floor(length(Links{BSID, UEID}.UETotalSignal_) / simParams.modulation.numerOfSubcarriers);
         psd = fft(reshape(Links{BSID, UEID}.UETotalSignal_(1:OFDMSymbol*simParams.modulation.numerOfSubcarriers), [], OFDMSymbol));
         mesh(10*log10(abs(psd)));

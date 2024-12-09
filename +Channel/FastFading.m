@@ -566,6 +566,7 @@ classdef FastFading < handle
             
             [TimeCorrelation,Time]=obj.GetTimeCorrelation;
             figure();
+            set(gcf, 'Name', 'TCF');
             plot(Time,abs(TimeCorrelation));
             ylabel('|Time Correlation|');
             xlabel('Time (s)');
@@ -585,6 +586,7 @@ classdef FastFading < handle
             
             [FrequencyCorrelation,Frequency]=obj.GetFrequencyCorrelation;
             figure();
+            set(gcf, 'Name', 'FCF');
             plot(Frequency,abs(FrequencyCorrelation));
             ylabel('|Frequency Correlation|');
             xlabel('Frequency (Hz)');
@@ -607,6 +609,7 @@ classdef FastFading < handle
                 DesiredTemp = DesiredTemp/sum(DesiredTemp);
                 RMSDelaySpread = obj.GetRmsDelaySpread;
                 figure()
+                set(gcf, 'Name', 'PDP');
                 stem(obj.PHY.DesiredPowerDelayProfiledB(2,:)/1e-6,DesiredTemp,'-x red');
                 hold on;
                 stem(Tau/1e-6,PowerDelayProfile,'-o  blue');
