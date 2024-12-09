@@ -354,5 +354,17 @@ for iBS = 1:nBS
         % 显示 MSE
         disp(['MSE of PDP: ', num2str(MSE_PDP)]);
         disp(['MSE of FCF: ', num2str(MSE_FCF)]);
+
+        % 统计带外泄露功率 OOBE
+        fs = simParams.modulation.samplingRate;
+        B = simParams.modulation.subcarrierSpacing * simParams.modulation.numerOfSubcarriers;
+        N = length(Links{BSID, UEID}.ReceiveSignal);
+        df = fs / N;
+        psd = fft(Links{BSID, UEID}.ReceiveSignal);
+
+        E = sum(abs(psd).^2);
+        E_in = sum(abs(psd(1:ceil(B/df))).^2);
+        E_oobe = E - E_in;
+        disp(['OOBE: ', num2str(E_oobe/E)]);
     end
 end
