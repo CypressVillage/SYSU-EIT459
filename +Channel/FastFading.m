@@ -108,11 +108,11 @@ classdef FastFading < handle
                         PowerDelayProfileINdB_DelayIndex = [...
                             -2.5,0,-12.8,-10,-25.2,-16;...                            
                             0,300e-9,8900e-9,12900e-9,17100e-9,20000e-9];
-                    case 'ExtendedPedestrianA'
+                    case {'ExtendedPedestrianA', 'EPA'}
                         PowerDelayProfileINdB_DelayIndex = [...
                             0,-1,-2,-3,-8,-17.2,-20.8;
                             0,30e-9,70e-9,90e-9,110e-9,190e-9,410e-9];
-                    case 'ExtendedVehicularA'
+                    case {'ExtendedVehicularA', 'EVA'}
                         PowerDelayProfileINdB_DelayIndex = [...
                             0,-1.5,-1.4,-3.6,-0.6,-9.1,-7,-12,-16.9; 
                             0,30e-9,150e-9,310e-9,370e-9,710e-9,1090e-9,1730e-9,2510e-9];
