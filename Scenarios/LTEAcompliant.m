@@ -107,7 +107,7 @@ scStr.modulation.numerOfSubcarriers         = 1024;                       % this
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 140;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 10;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
-scStr.modulation.samplingRate               = 15.36e6 * 2;              % sampling rate
+scStr.modulation.samplingRate               = 15.36e6 * 4;              % sampling rate
 
 %% Channel Coding Parameters
 scStr.coding.code                           = {'Turbo'};
