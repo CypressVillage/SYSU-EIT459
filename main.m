@@ -212,6 +212,15 @@ toc(startTime);
 % var4_1 = Links{1,2}.TransmitSignal(:, 1);
 % save('TransmitSignal.mat', 'var4_1')
 
+%% 保存吞吐量、误码率到.txt文件
+% 保存吞吐量
+throughput = mean(downlinkResults.userResults.throughput.values);
+% 保存误码率
+BER = mean(downlinkResults.userResults.BERUncoded.values);
+fprintf(2, 'Throughput: %f\n', throughput);
+fprintf(2, 'BER: %f\n', BER);
+return
+
 %% 绘图
 close all;
 for iBS = 1:nBS
