@@ -1,0 +1,109 @@
+D:\file\课程\EIT-459-软件无线电原理与系统设计\5GLLSimulator_v1.1\5GSimulator>python find_para.py
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 1413989.817979
+BER: 0.020397
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 1414310.377901
+BER: 0.024710
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 1414310.377901
+BER: 0.015943
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 755357.142857
+BER: 0.017923
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 755357.142857
+BER: 0.020273
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 15000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 755357.142857
+BER: 0.014036
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 2827979.635958
+BER: 0.050325
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 2827979.635958
+BER: 0.041537
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 2828620.755803
+BER: 0.040731
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 1510714.285714
+BER: 0.038905
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 1510714.285714
+BER: 0.044288
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 30000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 1510714.285714
+BER: 0.063262
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 5661091.721346
+BER: 0.086913
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 5655959.271916
+BER: 0.106384
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 1
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 5655959.271916
+BER: 0.106179
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 30720000.0
+Throughput: 3021428.571429
+BER: 0.111345
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 61440000.0
+Throughput: 2870357.142857
+BER: 0.123477
+-------------------
+Patched: scStr.modulation.subcarrierSpacing = 60000.0
+Patched: scStr.modulation.nGuardSymbols = 7
+Patched: scStr.modulation.samplingRate = 122880000.0
+Throughput: 3021428.571429
+BER: 0.095575
+-------------------
