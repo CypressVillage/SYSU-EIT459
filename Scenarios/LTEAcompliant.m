@@ -41,7 +41,7 @@ scStr.simulation.applySweepingTo            = [1];                      % Define
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
                                                                         % Enter a single 1 if you want all of them to be swept over.
 % Number of simulation frames
-scStr.simulation.nFrames                    = 20;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
+scStr.simulation.nFrames                    = 10;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
 
 %% Physical Transmission Parameters
 scStr.simulation.centerFrequency            = 2.5e9;                    % center frequency
@@ -96,14 +96,14 @@ scStr.feedback.ri                           = false;
 scStr.feedback.cqi                          = true;
 scStr.modulation.nStreams                   = 1;                        % 2 active spatial stream
 scStr.modulation.precodingMatrix{1}         = 1/sqrt(2) * eye(1);       % employed precoding matrix
-scStr.modulation.mcs                        = 3;
+scStr.modulation.mcs                        = 1;
 
 %% Modulation Parameters
 % waveform
 scStr.modulation.waveform                   = { 'OFDM' }; 
 
 % numerology setup
-scStr.modulation.numerOfSubcarriers         = 300;                       % this corresponds to a 1.4MHz transmission
+scStr.modulation.numerOfSubcarriers         = 280;                       % this corresponds to a 1.4MHz transmission
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 14;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
@@ -116,7 +116,7 @@ scStr.coding.decodingIterations             = 8;
 
 %% Schedule
 % static schedule per base station
-scStr.schedule.fixedScheduleDL{1}           = ['UE1:300'];             % downlink only
+scStr.schedule.fixedScheduleDL{1}           = ['UE1:280'];             % downlink only
 scStr.schedule.fixedScheduleUL{1}           = [];
 
 
