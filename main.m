@@ -81,13 +81,17 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
             end
         end
         
-        %% Downlink
+        %% Downlink Transmit
         if simParams.simulation.simulateDownlink
         % All BSs generate their transmit signal for this frame
             for iBS = 1:nBS
                 BS{iBS}.generateTransmitSignal(Links);
             end
             
+        end
+
+        %% Downlink Receive
+        if simParams.simulation.simulateDownlink
             for iUE = 1:nUE
                 UEID = UE{iUE}.ID;
                 primaryLink = Links{UE{iUE}.TransmitBS(1), UEID};             
