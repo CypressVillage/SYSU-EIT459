@@ -41,7 +41,7 @@ scStr.simulation.applySweepingTo            = [1];                      % Define
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
                                                                         % Enter a single 1 if you want all of them to be swept over.
 % Number of simulation frames
-scStr.simulation.nFrames                    = 10;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
+scStr.simulation.nFrames                    = 100;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
 
 %% Physical Transmission Parameters
 scStr.simulation.centerFrequency            = 2.5e9;                    % center frequency

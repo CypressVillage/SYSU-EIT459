@@ -42,6 +42,7 @@ fprintf(['------- Started -------', '\n']);
 
 % loop over sweep parameter
 for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'parfor'
+    ZC_OK = 0;
     % update sweep value
     simParams.UpdateSweepValue(iSweep); %#ok
     
@@ -134,11 +135,21 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
                     UETotalSignal = [preSeq; UETotalSignal];
                     
+                    % 添加一些噪声，用于测试 ZC 序列的同步性能
+                    noisePower = 7;
+                    UETotalSignal = UETotalSignal + Channel.AWGN(noisePower, length(UETotalSignal), UE{iUE}.nAntennas);
+                    
                     %% 对接收信号进行同步
                     index = xcorr(zcSequence, UETotalSignal);
                     [~, maxIndex] = max(abs(index));
                     % UETotalSignal = UETotalSignal(maxIndex:end);
                     UETotalSignal = UETotalSignal(length(UETotalSignal) - maxIndex + zcLength + 1:end);
+
+                    % 用于测试 ZC 序列的同步性能
+                    if length(UETotalSignal) == length(Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal)
+                        ZC_OK = ZC_OK + 1;
+                    end
+                    continue
 
                     % process received signal
                     UE{iUE}.processReceiveSignal(UETotalSignal, Links, simParams);
@@ -205,6 +216,10 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
     end % for iFrame
     simResults{iSweep} = perSweepResults;
 end % parfor iSweep
+
+% ZC序列同步性能测试
+fprintf('noisePower: %f, sync success: %f\n', noisePower, ZC_OK/nFrames);
+return
 
 %% post process simulation results
 if simParams.simulation.simulateDownlink
