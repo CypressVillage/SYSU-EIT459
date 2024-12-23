@@ -111,6 +111,8 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                 primaryLink = Links{UE{iUE}.TransmitBS(1), UEID};             
                 if primaryLink.isScheduled
                     % % 4.1 用信道模型生成接收机输入
+                    preSeq = Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal(1:zcLength+200);
+                    Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal = Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal(zcLength+201:end);
                     primaryLink.generateReceiveSignal();
                     UETotalSignal = primaryLink.ReceiveSignal;% UETotalSignal是接收机输入信号，也是USRP发射机发射信号
                     
@@ -130,7 +132,14 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     
                     % add noise
                     UETotalSignal = UETotalSignal + Channel.AWGN( simParams.phy.noisePower, length(UETotalSignal), UE{iUE}.nAntennas );
+                    UETotalSignal = [preSeq; UETotalSignal];
                     
+                    %% 对接收信号进行同步
+                    index = xcorr(zcSequence, UETotalSignal);
+                    [~, maxIndex] = max(abs(index));
+                    % UETotalSignal = UETotalSignal(maxIndex:end);
+                    UETotalSignal = UETotalSignal(length(UETotalSignal) - maxIndex + zcLength + 1:end);
+
                     % process received signal
                     UE{iUE}.processReceiveSignal(UETotalSignal, Links, simParams);
                     Links{UE{iUE}.TransmitBS(1), UEID}.UETotalSignal_ = UETotalSignal;
