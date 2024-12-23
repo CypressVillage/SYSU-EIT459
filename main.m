@@ -136,9 +136,15 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     UETotalSignal = [preSeq; UETotalSignal];
                     
                     % 添加一些噪声，用于测试 ZC 序列的同步性能
-                    noisePower = 7;
+                    noisePower = 2;
                     UETotalSignal = UETotalSignal + Channel.AWGN(noisePower, length(UETotalSignal), UE{iUE}.nAntennas);
                     
+                    % 经过信道
+                    N = length(Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal);
+                    UETotalSignal = UETotalSignal(1:N);
+                    curLink = Links{UE{iUE}.TransmitBS(1), UEID};
+                    UETotalSignal = curLink.Channel.Convolution(UETotalSignal);
+
                     %% 对接收信号进行同步
                     index = xcorr(zcSequence, UETotalSignal);
                     [~, maxIndex] = max(abs(index));
@@ -146,7 +152,7 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     UETotalSignal = UETotalSignal(length(UETotalSignal) - maxIndex + zcLength + 1:end);
 
                     % 用于测试 ZC 序列的同步性能
-                    if length(UETotalSignal) == length(Links{UE{iUE}.TransmitBS(1), UEID}.TransmitSignal)
+                    if length(UETotalSignal) == N - zcLength - 200
                         ZC_OK = ZC_OK + 1;
                     end
                     continue
