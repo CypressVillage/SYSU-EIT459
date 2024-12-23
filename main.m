@@ -84,16 +84,35 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
         %% Downlink
         if simParams.simulation.simulateDownlink
         % All BSs generate their transmit signal for this frame
+        %% 发射机模块
             for iBS = 1:nBS
+                 % 设置ZC序列的参数
+                zcLength = 139;  % ZC序列的长度（可以根据需求调整）
+                zcSeed = 25;    % ZC序列的种子值（可以根据需求调整）
+                % 生成ZC序列
+                zcSequence = zadoffChuSeq(zcSeed, zcLength);  % 生成ZC序列
+                % 生成基站的发送信号
                 BS{iBS}.generateTransmitSignal(Links);
+                for iUE = 1:length(BS{iBS}.ReceiveUE)
+                    % 将ZC序列插入到发送信号的开头
+                    BSTransmitSignal = Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal;  % 原始的发送信号
+                    Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal = [zcSequence; BSTransmitSignal];
+                    % 对信号整体加噪声
+                    Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal = Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal + Channel.AWGN(simParams.phy.noisePower, length(Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal), BS{iBS}.nAntennas);
+                    % 生成长度为200采样点的噪声数据
+                    noiseData = Channel.AWGN(simParams.phy.noisePower, 200, BS{iBS}.nAntennas);
+                    % 将噪声数据插入到发送信号的开头
+                    Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal = [noiseData; Links{BS{iBS}.ID,BS{iBS}.ReceiveUE(iUE)}.TransmitSignal];
+                end
             end
-            
+        %% 接收机模块    
             for iUE = 1:nUE
                 UEID = UE{iUE}.ID;
                 primaryLink = Links{UE{iUE}.TransmitBS(1), UEID};             
                 if primaryLink.isScheduled
+                    % % 4.1 用信道模型生成接收机输入
                     primaryLink.generateReceiveSignal();
-                    UETotalSignal = primaryLink.ReceiveSignal;
+                    UETotalSignal = primaryLink.ReceiveSignal;% UETotalSignal是接收机输入信号，也是USRP发射机发射信号
                     
                     % % 4.2 用保存的信号文件作为接收机输入
                     % UETotalSignal = primaryLink.TransmitSignal;
@@ -103,6 +122,8 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                         currentLink = Links{UE{iUE}.TransmitBS(iBS), UEID};
                         currentLink.generateReceiveSignal();
                         UETotalSignal = Channel.addSignals(UETotalSignal, currentLink.ReceiveSignal);
+                        % % 不经过信道保存的信号文件作为接收机输入
+                        % UETotalSignal = Channel.addSignals(UETotalSignal, currentLink.TransmitSignal);
                     end
                     % correct signal length
                     UETotalSignal = Channel.correctSignalLength(UETotalSignal, primaryLink.Modulator.WaveformObject.Nr.SamplesTotal);
