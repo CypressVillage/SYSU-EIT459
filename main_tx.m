@@ -208,9 +208,9 @@ fprintf(['------- Done -------', '\n']);
 toc(startTime);
 
 
-% % 保存发射信号
-% var4_1 = Links{1,2}.TransmitSignal(:, 1);
-% save('TransmitSignal.mat', 'var4_1')
+% 保存发射信号
+var4_1 = Links{1,2}.TransmitSignal(:, 1);
+save('TransmitSignal.mat', 'var4_1')
 
 %% 绘图
 close all;
