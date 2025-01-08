@@ -15,8 +15,9 @@ disp(radio);
 % disp(simParams.usrpTX);
 disp(['发送数据进行中...']);
 
-% save('txSig.mat', 'txSig'); % 保存预先生成的发送信号txSig
-txSig = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]';
+txSig = load('TransmitSignal.mat', '-mat'); % 保存预先生成的发送信号txSig
+txSig = txSig.var4_1;
+% txSig = ones(10000, 1);
 
 % 循环发送直至手动终止
 while true
