@@ -49,8 +49,8 @@ scStr.simulation.centerFrequency            = 2.5e9;                    % center
 scStr.simulation.txPowerBaseStation         = 30;                       % base station total transmit power in dBm
 scStr.simulation.txPowerUser                = 30;                       % user total transmit power in dBm
 
-scStr.simulation.nAntennasBaseStation       = 2;                        % 2x2 MIMO
-scStr.simulation.nAntennasUser              = 2;                        % 
+scStr.simulation.nAntennasBaseStation       = 1;                        % 2x2 MIMO
+scStr.simulation.nAntennasUser              = 1;                        % 
 scStr.simulation.userVelocity               = 33.3;                        % UE velocity in m/s
 
 scStr.simulation.pathloss                   = [80];                     % per Link, channel pathloss in dB, this is most likely swept over
@@ -107,7 +107,7 @@ scStr.modulation.numerOfSubcarriers         = 300;                       % this 
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
-scStr.modulation.samplingRate               = 15e3 * 2048;              % sampling rate
+scStr.modulation.samplingRate               = 15e3 * 1024;              % sampling rate
 
 %% Channel Coding Parameters
 scStr.coding.code                           = {'Turbo'};
