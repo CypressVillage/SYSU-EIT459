@@ -5,8 +5,8 @@ radio = comm.SDRuReceiver(...
     'MasterClockRate', 100e6, ...
     'CenterFrequency', 1.5e9, ...
     'Gain', 10, ...
-    'DecimationFactor', 20, ...
-    'SamplesPerFrame', 4000 * 2.5, ... % 发送样点数 * 2.5
+    'DecimationFactor', 10, ...
+    'SamplesPerFrame', 5000 * 2.5, ... % 发送样点数 * 2.5
     'OutputDataType', 'double');
 
 radio.OverrunOutputPort = true;
@@ -44,7 +44,7 @@ RXusrp_data = hlog.Buffer;
 
 % zc同步
 transmitSignalLength = 4494; % 发送信号的长度
-zcLength = 139;  % ZC序列的长度（可以根据需求调整）
+zcLength = 503;  % ZC序列的长度（可以根据需求调整）
 zcSeed = 25;    % ZC序列的种子值（可以根据需求调整）
 zcSequence = zadoffChuSeq(zcSeed, zcLength);  % 生成ZC序列
 

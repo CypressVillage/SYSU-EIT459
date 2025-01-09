@@ -41,7 +41,7 @@ scStr.simulation.applySweepingTo            = [1];                      % Define
                                                                         % All other nodes (or links) set to 0 here will use the custom values entered below. 
                                                                         % Enter a single 1 if you want all of them to be swept over.
 % Number of simulation frames
-scStr.simulation.nFrames                    = 20;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
+scStr.simulation.nFrames                    = 2;                      % Number of frames to simulate per sweep value, adjust to obtain sufficiently small confidence intervals.
 
 %% Physical Transmission Parameters
 scStr.simulation.centerFrequency            = 2.5e9;                    % center frequency
@@ -107,7 +107,7 @@ scStr.modulation.numerOfSubcarriers         = 300;                       % this 
 scStr.modulation.subcarrierSpacing          = 15e3;                     
 scStr.modulation.nSymbolsTotal              = 15;                       % 15 symbols out of which one is used for all CPs
 scStr.modulation.nGuardSymbols              = 1;                        % use one out of 15 symbol durations as CP for remaining 14 symbols
-scStr.modulation.samplingRate               = 15e3 * 1024;              % sampling rate
+scStr.modulation.samplingRate               = 15e3 * 300;              % sampling rate
 
 %% Channel Coding Parameters
 scStr.coding.code                           = {'Turbo'};
