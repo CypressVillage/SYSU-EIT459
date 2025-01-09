@@ -6,7 +6,7 @@ radio = comm.SDRuReceiver(...
     'CenterFrequency', 1.5e9, ...
     'Gain', 10, ...
     'DecimationFactor', 20, ...
-    'SamplesPerFrame', 20 * 2.5, ... % 发送样点数 * 2.5
+    'SamplesPerFrame', 4000 * 2.5, ... % 发送样点数 * 2.5
     'OutputDataType', 'double');
 
 radio.OverrunOutputPort = true;
@@ -41,4 +41,18 @@ disp(['数据采集结束！']);
 release(radio);
 
 RXusrp_data = hlog.Buffer;
+
+% zc同步
+transmitSignalLength = 4494; % 发送信号的长度
+zcLength = 139;  % ZC序列的长度（可以根据需求调整）
+zcSeed = 25;    % ZC序列的种子值（可以根据需求调整）
+zcSequence = zadoffChuSeq(zcSeed, zcLength);  % 生成ZC序列
+
+index = xcorr(zcSequence, UETotalSignal);
+[~, maxIndex] = max(abs(index));
+startID = length(UETotalSignal) - maxIndex + zcLength + 1;
+endID = startID + transmitSignalLength - 1;
+UETotalSignal = UETotalSignal(startID:endID);
+
+
 save('RXusrp_data.mat', 'RXusrp_data', '-v7.3'); % 保存接收到的信息
