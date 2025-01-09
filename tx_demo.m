@@ -5,7 +5,7 @@ radio = comm.SDRuTransmitter(...
     'MasterClockRate', 100e6, ...
     'CenterFrequency', 1.5e9, ...
     'Gain', 10, ...
-    'InterpolationFactor', 20);
+    'InterpolationFactor', 10);
 
 radio.UnderrunOutputPort = true;
 
@@ -17,7 +17,12 @@ disp(['发送数据进行中...']);
 
 txSig = load('TransmitSignal.mat', '-mat'); % 保存预先生成的发送信号txSig
 txSig = txSig.var4_1;
-% txSig = ones(10000, 1);
+
+zcLength = 139;  % ZC序列的长度（可以根据需求调整）
+zcSeed = 25;    % ZC序列的种子值（可以根据需求调整）
+zcSequence = zadoffChuSeq(zcSeed, zcLength);  % 生成ZC序列
+
+txSig = [zcSequence; txSig]; % 将ZC序列与发送信号拼接
 
 % 循环发送直至手动终止
 while true
