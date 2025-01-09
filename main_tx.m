@@ -8,7 +8,7 @@
 close all;
 clear;
 clc;
-
+rng(42);  % 设置随机数种子为42
 %% Setup
 % select scenario
 simulationScenario = 'LTEAcompliant';           % select a simulation scenario:
