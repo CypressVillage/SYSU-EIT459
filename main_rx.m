@@ -97,7 +97,8 @@ for iSweep = 1:length(simParams.simulation.sweepValue) % this may be 'for' or 'p
                     
                     % % 4.2 用保存的信号文件作为接收机输入
                     % UETotalSignal = primaryLink.TransmitSignal;
-                    UETotalSignal = load('RXusrp_data.mat', '-mat');
+                    UETotalSignal = load('RXusrp_data.mat');
+                    UETotalSignal = UETotalSignal.RXusrp_data;
 
                     % Collect signals from all other BSs
                     for iBS = 2:length(UE{iUE}.TransmitBS)
