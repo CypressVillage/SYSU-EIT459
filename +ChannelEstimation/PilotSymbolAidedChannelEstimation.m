@@ -23,7 +23,7 @@ classdef PilotSymbolAidedChannelEstimation < handle
             obj.InterpolationMethod   = varargin{3};
             schedule                  = varargin{4};
             nAntennas                 = varargin{5};
-            
+ 
             % Generate pilot matrix according to the specified pilot pattern.
             % A zero corresponse to a data symbol, a one to a pilot symbol
             switch obj.PilotPattern
@@ -32,6 +32,9 @@ classdef PilotSymbolAidedChannelEstimation < handle
                     obj.PilotSpacingFrequency   = varargin{2}(1,2);
                     nMCSymbols                  = varargin{2}(2,1);
                     obj.PilotSpacingTime        = varargin{2}(2,2);
+
+                    obj.PilotSpacingFrequency   = 1;
+                    obj.PilotSpacingTime        = 1;
                     
                     % check number of antennas
                     if nAntennas > obj.PilotSpacingFrequency
@@ -41,6 +44,8 @@ classdef PilotSymbolAidedChannelEstimation < handle
                     tmpPilotMatrix = zeros(nSubcarriers, nMCSymbols);
                     tmpPilotMatrix(round(mod(nSubcarriers-1,obj.PilotSpacingFrequency)/2)+1:obj.PilotSpacingFrequency:nSubcarriers,round(round(mod(nMCSymbols-1,obj.PilotSpacingTime)/2)+1:obj.PilotSpacingTime:nMCSymbols)) = true;
                     
+                    tmpPilotMatrix(:,end)=0;
+
                     obj.PilotMatrix   = zeros( nSubcarriers, nMCSymbols, nAntennas );
                     for iAnt = 1:nAntennas
                         obj.PilotMatrix(:,:,iAnt) = circshift(tmpPilotMatrix, iAnt-1, 1);
@@ -50,6 +55,9 @@ classdef PilotSymbolAidedChannelEstimation < handle
                     obj.PilotSpacingFrequency   = varargin{2}(1,2);
                     nMCSymbols                  = varargin{2}(2,1);
                     obj.PilotSpacingTime        = varargin{2}(2,2);
+
+                    obj.PilotSpacingFrequency   = 1;
+                    obj.PilotSpacingTime        = 1;
                     
                     % check number of antennas
                     if nAntennas > obj.PilotSpacingFrequency
